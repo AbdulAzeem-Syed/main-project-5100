@@ -4,6 +4,7 @@ package Model;
  *
  * @author Abdul
  */
+// Wajid
 public class User {
     private int userId;
     private String name;
