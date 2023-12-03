@@ -24,9 +24,10 @@ public class Homepage extends javax.swing.JPanel {
     /**
      * Creates new form Homepage
      */
-    
+    private ArrayList<Book> books = new ArrayList();
     public Homepage() {
         initComponents();
+        updateTable();
         try{
         File file = new File("Logo.png");
         BufferedImage img = ImageIO.read(file);
@@ -173,7 +174,14 @@ public class Homepage extends javax.swing.JPanel {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        
+        var sorter = new TableRowSorter(booksTable.getModel());
+        booksTable.setRowSorter(sorter);
+        var searchString = searchBook.getText();
+        if (searchString.length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter(searchString));
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void queryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryButtonActionPerformed
@@ -192,5 +200,27 @@ public class Homepage extends javax.swing.JPanel {
     private javax.swing.JButton searchButton;
     private javax.swing.JButton viewBook;
     // End of variables declaration//GEN-END:variables
-    
+    public void updateTable()
+    {
+        Book book1 = new Book();
+        book1.setName("Test1");
+        book1.setAuthor("Test Author1");
+        book1.setIsAvailableOffline(true);
+        Book book2 = new Book();
+        book2.setName("Test2");
+        book2.setAuthor("Test Author2");
+        book2.setIsAvailableOffline(false);
+        this.books.add(book1);
+        this.books.add(book2);//DatabaseConnector.getAllCustomers();
+        DefaultTableModel model = (DefaultTableModel) booksTable.getModel();
+        model.setRowCount(0);
+        for(Book b : books)
+        {
+            Object [] row = new Object[3];
+            row[0] = b.getName();
+            row[1] = b.getAuthor();
+            row[2] = b.isAvailableOffline() ? "Available": "Not Available";
+            model.addRow(row);
+        }
+    }
 }
