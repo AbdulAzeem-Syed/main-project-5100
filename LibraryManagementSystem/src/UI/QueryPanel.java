@@ -39,6 +39,8 @@ public class QueryPanel extends javax.swing.JPanel {
         submitButton = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
         feedbackRadioButton = new javax.swing.JRadioButton();
+        emailLabel = new javax.swing.JLabel();
+        emailTextField = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(700, 500));
 
@@ -68,6 +70,8 @@ public class QueryPanel extends javax.swing.JPanel {
         commentonbuttonGroup.add(feedbackRadioButton);
         feedbackRadioButton.setText("Feedback");
 
+        emailLabel.setText("Email:");
+
         javax.swing.GroupLayout queryPanelLayout = new javax.swing.GroupLayout(queryPanel);
         queryPanel.setLayout(queryPanelLayout);
         queryPanelLayout.setHorizontalGroup(
@@ -82,7 +86,8 @@ public class QueryPanel extends javax.swing.JPanel {
                         .addGap(43, 43, 43)
                         .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(commentLabel)
-                            .addComponent(queryaboutLabel))
+                            .addComponent(queryaboutLabel)
+                            .addComponent(emailLabel))
                         .addGap(51, 51, 51)
                         .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(queryPanelLayout.createSequentialGroup()
@@ -91,7 +96,8 @@ public class QueryPanel extends javax.swing.JPanel {
                                 .addComponent(queryRadioButton)
                                 .addGap(38, 38, 38)
                                 .addComponent(feedbackRadioButton))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(queryPanelLayout.createSequentialGroup()
                         .addGap(236, 236, 236)
                         .addComponent(submitButton)
@@ -112,12 +118,17 @@ public class QueryPanel extends javax.swing.JPanel {
                     .addComponent(feedbackRadioButton))
                 .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(queryPanelLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(queryaboutLabel))
-                    .addGroup(queryPanelLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(102, 102, 102)
+                        .addGap(30, 30, 30)
+                        .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emailLabel)
+                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addComponent(queryaboutLabel)
+                        .addGap(133, 133, 133))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queryPanelLayout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)))
                 .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitButton)
                     .addComponent(clearButton))
@@ -142,6 +153,8 @@ public class QueryPanel extends javax.swing.JPanel {
     private javax.swing.JLabel commentLabel;
     private javax.swing.ButtonGroup commentonbuttonGroup;
     private javax.swing.JRadioButton complaintRadioButton;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailTextField;
     private javax.swing.JRadioButton feedbackRadioButton;
     private javax.swing.JLabel headingLabel;
     private javax.swing.JScrollPane jScrollPane1;
