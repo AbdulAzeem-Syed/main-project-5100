@@ -27,7 +27,17 @@ public class Homepage extends javax.swing.JPanel {
     
     public Homepage() {
         initComponents();
-        
+        try{
+        File file = new File("Logo.png");
+        BufferedImage img = ImageIO.read(file);
+        var edited_image = img.getScaledInstance(245, 104, Image.SCALE_SMOOTH);
+        logo.setText("");
+        logo.setIcon(new ImageIcon(edited_image));
+        }
+        catch(Exception e)
+        {
+            System.out.print(e);
+        }
     }
 
     /**
