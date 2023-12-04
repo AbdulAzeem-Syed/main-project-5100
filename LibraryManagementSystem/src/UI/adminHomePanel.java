@@ -4,7 +4,7 @@
  */
 package UI;
 
-import Util.AdminDatabaseConnector;
+import Util.BookJDBConnector;
 import javax.swing.JPanel;
 
 /**
@@ -110,7 +110,7 @@ public class adminHomePanel extends javax.swing.JPanel {
 
     private void refreshSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshSummaryButtonActionPerformed
         // TODO add your handling code here:
-        AdminDatabaseConnector.getData();
+        BookJDBConnector.getData();
  //       totalBooksTextField.setText();
  //       totalUsersTextField.setText();
  //       totalReportsTextField.setText();
