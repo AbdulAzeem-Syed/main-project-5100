@@ -31,7 +31,7 @@ public class Homepage extends javax.swing.JPanel {
         try{
         File file = new File("Logo.png");
         BufferedImage img = ImageIO.read(file);
-        var edited_image = img.getScaledInstance(245, 104, Image.SCALE_SMOOTH);
+        Image edited_image = img.getScaledInstance(245, 104, Image.SCALE_SMOOTH);
         logo.setText("");
         logo.setIcon(new ImageIcon(edited_image));
         }
@@ -174,9 +174,9 @@ public class Homepage extends javax.swing.JPanel {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        var sorter = new TableRowSorter(booksTable.getModel());
+        TableRowSorter sorter = new TableRowSorter(booksTable.getModel());
         booksTable.setRowSorter(sorter);
-        var searchString = searchBook.getText();
+        String searchString = searchBook.getText();
         if (searchString.length() == 0) {
             sorter.setRowFilter(null);
         } else {

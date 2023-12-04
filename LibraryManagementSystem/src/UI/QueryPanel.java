@@ -5,6 +5,12 @@
  */
 package UI;
 
+
+import java.awt.Color;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import Model.UserMessage;
+import Util.UserMessageDBConnector;
 /**
  *
  * @author Lohitha Atluri
@@ -56,6 +62,11 @@ public class QueryPanel extends javax.swing.JPanel {
 
         commentonbuttonGroup.add(queryRadioButton);
         queryRadioButton.setText("Query");
+        queryRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                queryRadioButtonActionPerformed(evt);
+            }
+        });
 
         queryaboutLabel.setText("Comment:");
 
@@ -64,13 +75,29 @@ public class QueryPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(queryTextArea);
 
         submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
 
         clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
 
         commentonbuttonGroup.add(feedbackRadioButton);
         feedbackRadioButton.setText("Feedback");
 
         emailLabel.setText("Email:");
+
+        emailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailTextFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout queryPanelLayout = new javax.swing.GroupLayout(queryPanel);
         queryPanel.setLayout(queryPanelLayout);
@@ -146,6 +173,68 @@ public class QueryPanel extends javax.swing.JPanel {
             .addComponent(queryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        // TODO add your handling code here:
+        UserMessage newMessage = new UserMessage();
+
+        try {
+            newMessage.setEmail(emailTextField.getText());
+            newMessage.setMessage(queryTextArea.getText());
+            newMessage.setType(commentonbuttonGroup.getSelection().getActionCommand());
+
+            // Validate inputs
+            if (newMessage.getMessage().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Comment is Mandatory");
+                return;
+            }
+
+            if (newMessage.getType() == null || newMessage.getType().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Comment Type is Mandatory");
+                return;
+            }
+
+            UserMessageDBConnector.addUserMessage(newMessage);
+
+            JOptionPane.showMessageDialog(null, "Query sent Successfully", "Successful Message", JOptionPane.PLAIN_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error submitting query: " + e.getMessage());
+        }
+    
+        
+    }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        // TODO add your handling code here:
+       
+       complaintRadioButton.setSelected(false);
+       feedbackRadioButton.setSelected(false);
+       queryRadioButton.setSelected(false);
+       emailTextField.setText(null);
+       queryTextArea.setText(null);
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
+        // TODO add your handling code here:
+        try{
+            if(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", emailTextField.getText())){
+                
+               
+                throw new Exception();
+             }
+            emailTextField.setForeground(Color.red);
+           }catch(Exception e){
+            emailTextField.setForeground(Color.black);
+           }
+    }//GEN-LAST:event_emailTextFieldActionPerformed
+
+    private void queryRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryRadioButtonActionPerformed
+        // TODO add your handling code here:
+        if(commentonbuttonGroup.getSelection().getActionCommand() == "query")
+                emailTextField.setEnabled(true);
+        else
+            emailTextField.setEnabled(true);
+    }//GEN-LAST:event_queryRadioButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

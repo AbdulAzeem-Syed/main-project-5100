@@ -50,4 +50,10 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public static class java {
+
+        public java() {
+        }
+    }
 }

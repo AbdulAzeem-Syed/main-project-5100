@@ -2,7 +2,7 @@ package Model;
 
 /**
  *
- * @author Abdul
+ * @author Amer
  */
 public class Book {
     private int bookId;
