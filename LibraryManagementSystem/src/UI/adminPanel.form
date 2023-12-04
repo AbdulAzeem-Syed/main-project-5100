@@ -63,7 +63,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="reportsButton" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="logotButton" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="logoutButton" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -75,7 +75,7 @@
                       <Component id="adminLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="logotButton" max="32767" attributes="0"/>
+                          <Component id="logoutButton" max="32767" attributes="0"/>
                           <Component id="booksButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="reportsButton" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -109,12 +109,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="booksButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="logotButton">
+            <Component class="javax.swing.JButton" name="logoutButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logotButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

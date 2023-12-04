@@ -33,7 +33,7 @@ public class adminPanel extends javax.swing.JPanel {
         adminLabel = new javax.swing.JLabel();
         reportsButton = new javax.swing.JButton();
         booksButton = new javax.swing.JButton();
-        logotButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
 
         adminSplitPane.setDividerSize(1);
@@ -58,10 +58,10 @@ public class adminPanel extends javax.swing.JPanel {
             }
         });
 
-        logotButton.setText("Logout");
-        logotButton.addActionListener(new java.awt.event.ActionListener() {
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logotButtonActionPerformed(evt);
+                logoutButtonActionPerformed(evt);
             }
         });
 
@@ -79,7 +79,7 @@ public class adminPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(logotButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
         topPanelLayout.setVerticalGroup(
@@ -89,7 +89,7 @@ public class adminPanel extends javax.swing.JPanel {
                 .addComponent(adminLabel)
                 .addGap(15, 15, 15)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logotButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(booksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(reportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -132,10 +132,10 @@ public class adminPanel extends javax.swing.JPanel {
         layout.next(bottomPanel);
     }//GEN-LAST:event_reportsButtonActionPerformed
 
-    private void logotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logotButtonActionPerformed
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_logotButtonActionPerformed
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -143,7 +143,7 @@ public class adminPanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane adminSplitPane;
     private javax.swing.JButton booksButton;
     private javax.swing.JPanel bottomPanel;
-    private javax.swing.JButton logotButton;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JButton reportsButton;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
