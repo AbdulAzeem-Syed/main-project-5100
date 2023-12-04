@@ -17,10 +17,10 @@ import Model.User;
  * @author amer2
  */
 public class UserJDBConnector {
-     private static final String URL = "jdbc:mysql://localhost:3306/test1?useSSL=false";
+     private static final String URL = "jdbc:mysql://localhost:5000/project?useSSL=false";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "1";
-
+    private static final String PASSWORD = "password";
+    
     /**
      * Privatized constructor so as to not allow object creation
      */
@@ -59,18 +59,20 @@ public class UserJDBConnector {
 //        return list of users from db
         ArrayList<User> users = new ArrayList<>();
 
-        String query = "SELECT * FROM User";
+        String query = "SELECT * FROM user";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 User u = new User();
+                u.setUserId(rs.getInt("userId"));
                 u.setName(rs.getString("name"));
                 u.setEmail(rs.getString("email"));
                 u.setRole(rs.getString("role"));
                 u.setPassword(rs.getString("password"));
                 users.add(u);
             } 
+            System.out.println("Connection Test");
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();

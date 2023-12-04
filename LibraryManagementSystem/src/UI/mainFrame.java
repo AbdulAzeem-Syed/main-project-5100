@@ -335,7 +335,7 @@ public class mainFrame extends javax.swing.JFrame {
 
     private void guestLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guestLoginButtonActionPerformed
         // TODO add your handling code here:
-        setContentPane(new Homepage());
+        setContentPane(new SearchUserJPanel());
         invalidate();
         validate();
     }//GEN-LAST:event_guestLoginButtonActionPerformed

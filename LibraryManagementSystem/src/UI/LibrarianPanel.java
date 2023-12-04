@@ -6,6 +6,7 @@ package UI;
 
 import Model.User;
 import Util.UserJDBConnector;
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Graphics;
@@ -33,7 +34,7 @@ public class LibrarianPanel extends javax.swing.JPanel {
 
     public LibrarianPanel() {
         initComponents();
-        populateData();
+       // populateData();
     }
 
     /**
@@ -62,7 +63,7 @@ public class LibrarianPanel extends javax.swing.JPanel {
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         userButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        userButton.setText("User Detail");
+        userButton.setText("Search User");
 
         searchButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchButton.setText("Search User");
@@ -73,7 +74,12 @@ public class LibrarianPanel extends javax.swing.JPanel {
         });
 
         bookButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        bookButton.setText("Book Detail");
+        bookButton.setText("Books Borrowed");
+        bookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -202,7 +208,15 @@ public class LibrarianPanel extends javax.swing.JPanel {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
+         SearchUserJPanel newViewPanel = new SearchUserJPanel();
+        bottomPanel.add(newViewPanel);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
