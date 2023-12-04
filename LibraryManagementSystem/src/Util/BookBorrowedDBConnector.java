@@ -56,7 +56,9 @@ public class BookBorrowedDBConnector  {
 //        return list of BookBorrowed from db
         ArrayList<BookBorrowed> BookBorrowed = new ArrayList<>();
 
-        String query = "SELECT * FROM book_borrowed";
+        String query = "SELECT bb.*, u.name as userName, b.name as bookName FROM project.book_borrowed bb \n" +
+                        "INNER JOIN project.user u on u.userId = bb.userId\n" +
+                        "INNER JOIN project.book b on b.bookId = bb.bookId;";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -67,6 +69,8 @@ public class BookBorrowedDBConnector  {
                 u.setUserId(rs.getInt("userId"));
                 u.setDueDate(rs.getDate("dueDate"));
                 u.setStatus(rs.getString("status"));
+                u.setBookName(rs.getString("bookName"));
+                u.setUserName(rs.getString("userName"));
                 BookBorrowed.add(u);
             } 
             rs.close();
@@ -101,13 +105,12 @@ public class BookBorrowedDBConnector  {
      * @param newBookBorrowed modified BookBorrowed details to be added
      */
     public static void editBookBorrowed(BookBorrowed oldBookBorrowed, BookBorrowed newBookBorrowed) {
-        String query = "UPDATE book_borrowed SET status=?, bookId=? WHERE borrowId=?";
+        String query = "UPDATE book_borrowed SET status=? WHERE borrowId=?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, newBookBorrowed.getStatus());
-            stmt.setInt(2, newBookBorrowed.getBookId());
-            stmt.setInt(3, oldBookBorrowed.getBorrowId());
+            stmt.setInt(2, oldBookBorrowed.getBorrowId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

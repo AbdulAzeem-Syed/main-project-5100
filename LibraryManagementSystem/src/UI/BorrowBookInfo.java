@@ -6,6 +6,7 @@ package UI;
 
 import Model.Book;
 import Model.BookBorrowed;
+import Util.BookBorrowedDBConnector;
 import static java.awt.image.ImageObserver.HEIGHT;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class BorrowBookInfo extends javax.swing.JPanel {
     public BorrowBookInfo() {
         initComponents();
         updateTable();
+        borrowerInfoTable.removeColumn(borrowerInfoTable.getColumnModel().getColumn(4));
         cleanup();
     }
 
@@ -52,17 +54,17 @@ public class BorrowBookInfo extends javax.swing.JPanel {
 
         borrowerInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Book", "Borrower", "Status", "Due Date"
+                "Book", "Borrower", "Status", "Due Date", "BookId"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -71,6 +73,10 @@ public class BorrowBookInfo extends javax.swing.JPanel {
         });
         borrowerInfoTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(borrowerInfoTable);
+        if (borrowerInfoTable.getColumnModel().getColumnCount() > 0) {
+            borrowerInfoTable.getColumnModel().getColumn(4).setResizable(false);
+            borrowerInfoTable.getColumnModel().getColumn(4).setPreferredWidth(0);
+        }
 
         searchBorowerInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,9 +137,7 @@ public class BorrowBookInfo extends javax.swing.JPanel {
                     .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
                         .addComponent(updateBookStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -142,8 +146,8 @@ public class BorrowBookInfo extends javax.swing.JPanel {
                         .addGap(30, 30, 30)
                         .addComponent(statusType, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(Submit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))))
+                        .addComponent(Submit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,7 +156,7 @@ public class BorrowBookInfo extends javax.swing.JPanel {
     }//GEN-LAST:event_searchBorowerInfoActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        // TODO add your handling code here:
+        
         var sorter = new TableRowSorter(borrowerInfoTable.getModel());
         borrowerInfoTable.setRowSorter(sorter);
         var searchString = searchBorowerInfo.getText();
@@ -164,8 +168,28 @@ public class BorrowBookInfo extends javax.swing.JPanel {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
-        // TODO add your handling code here:
-        cleanup();
+        int selectedIndex = borrowerInfoTable.getSelectedRow();
+        if(selectedIndex == -1)
+        {
+            JOptionPane.showMessageDialog(this, "No book selected", "Error", HEIGHT);
+            return;
+        }
+        try
+        {
+            BookBorrowed newBookBorrowed = selectedBook;
+            newBookBorrowed.setStatus(statusType.getSelectedItem().toString());
+
+            BookBorrowedDBConnector.editBookBorrowed(selectedBook, newBookBorrowed);
+
+            String outputMessage = "Edit successfull";
+            JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+            cleanup();
+            updateTable();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", HEIGHT);
+        }
     }//GEN-LAST:event_SubmitActionPerformed
 
     private void updateBookStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBookStatusActionPerformed
@@ -212,17 +236,20 @@ public class BorrowBookInfo extends javax.swing.JPanel {
         book2.setBookName("Test book2");
         book2.setStatus("Borrowed");
         //book2.setDueDate(LocalDate.now());
-        this.booksBorrowed.add(book1);
-        this.booksBorrowed.add(book2);//DatabaseConnector.getAllCustomers();
+        //this.booksBorrowed.add(book1);
+        //this.booksBorrowed.add(book2);
+        this.booksBorrowed = BookBorrowedDBConnector.getAllBookBorrowed();
+        
         DefaultTableModel model = (DefaultTableModel) borrowerInfoTable.getModel();
         model.setRowCount(0);
         for(BookBorrowed b : booksBorrowed)
         {
-            Object [] row = new Object[4];
+            Object [] row = new Object[5];
             row[0] = b.getBookName();
             row[1] = b.getUserName();
             row[2] = b.getStatus();
-            row[3] = b.getStatus();
+            row[3] = b.getDueDate();
+            row[4] = b.getBookId();
             model.addRow(row);
         }
     }
