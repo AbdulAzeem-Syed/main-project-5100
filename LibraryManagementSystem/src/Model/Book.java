@@ -6,7 +6,7 @@ package Model;
  */
 public class Book {
     private int bookId;
-    private String name;
+    private String bookname;
     private String author;
     private boolean isAvailable;
 
@@ -26,12 +26,12 @@ public class Book {
         this.bookId = bookId;
     }
 
-    public String getName() {
-        return name;
+    public String getBookname() {
+        return bookname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBookname(String name) {
+        this.bookname = bookname;
     }
 
     public boolean getIsAvailable() {
