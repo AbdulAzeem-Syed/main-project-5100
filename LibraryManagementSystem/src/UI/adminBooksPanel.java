@@ -5,9 +5,15 @@
 package UI;
 
 import Model.Book;
+import Model.UserMessage;
+import java.awt.desktop.UserSessionEvent;
+import java.util.ArrayList;
 import Util.AdminDatabaseConnector;
+import Util.UserMessageDBConnector;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -18,8 +24,13 @@ public class adminBooksPanel extends javax.swing.JPanel {
     /**
      * Creates new form adminBooksPanel
      */
+    private ArrayList<Book> books;
+    private Book selectedBook;
+
+    
     public adminBooksPanel(JPanel bottomPanel) {
         initComponents();
+        populateTable();
     }
 
     /**
@@ -37,8 +48,19 @@ public class adminBooksPanel extends javax.swing.JPanel {
         authorLabel = new javax.swing.JLabel();
         authorTextField = new javax.swing.JTextField();
         addBookButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        bookTable = new javax.swing.JTable();
+        editBookButton = new javax.swing.JButton();
+        deleteBookButton = new javax.swing.JButton();
+        editBookNameLabel = new javax.swing.JLabel();
+        editBookAuthorLabel = new javax.swing.JLabel();
+        editBookNameTextField = new javax.swing.JTextField();
+        editBookAuthorTextField = new javax.swing.JTextField();
+        saveBookButton = new javax.swing.JButton();
+        editBookLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
+        setPreferredSize(new java.awt.Dimension(700, 400));
 
         addBooksLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         addBooksLabel.setText("Add Books");
@@ -47,6 +69,7 @@ public class adminBooksPanel extends javax.swing.JPanel {
 
         authorLabel.setText("Author:");
 
+        addBookButton.setBackground(new java.awt.Color(153, 153, 255));
         addBookButton.setText("Submit");
         addBookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,41 +77,141 @@ public class adminBooksPanel extends javax.swing.JPanel {
             }
         });
 
+        bookTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "bookId", "name", "author", "isAvailable"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(bookTable);
+        if (bookTable.getColumnModel().getColumnCount() > 0) {
+            bookTable.getColumnModel().getColumn(0).setResizable(false);
+            bookTable.getColumnModel().getColumn(1).setResizable(false);
+            bookTable.getColumnModel().getColumn(2).setResizable(false);
+            bookTable.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        editBookButton.setBackground(new java.awt.Color(153, 153, 255));
+        editBookButton.setText("Edit");
+        editBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBookButtonActionPerformed(evt);
+            }
+        });
+
+        deleteBookButton.setBackground(new java.awt.Color(153, 153, 255));
+        deleteBookButton.setText("Delete");
+        deleteBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBookButtonActionPerformed(evt);
+            }
+        });
+
+        editBookNameLabel.setText("Name:");
+
+        editBookAuthorLabel.setText("Author:");
+
+        saveBookButton.setBackground(new java.awt.Color(153, 153, 255));
+        saveBookButton.setText("Save");
+        saveBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBookButtonActionPerformed(evt);
+            }
+        });
+
+        editBookLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        editBookLabel.setText("Edit Books");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(279, 279, 279)
-                        .addComponent(addBooksLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(bookNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bookNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(authorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(authorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(addBookButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(bookNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                                    .addComponent(authorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bookNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(authorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addComponent(addBooksLabel))))
+                            .addComponent(addBookButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(editBookButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(deleteBookButton, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(editBookAuthorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                            .addComponent(editBookNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(editBookAuthorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                            .addComponent(editBookNameTextField)))
+                                    .addComponent(saveBookButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(editBookLabel)
+                                .addGap(68, 68, 68))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addBooksLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBooksLabel)
+                    .addComponent(editBookLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookNameLabel)
                     .addComponent(bookNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editBookButton)
+                    .addComponent(editBookNameLabel)
+                    .addComponent(editBookNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(authorLabel)
                     .addComponent(authorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addBookButton))
-                .addContainerGap(334, Short.MAX_VALUE))
+                    .addComponent(editBookAuthorLabel)
+                    .addComponent(editBookAuthorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteBookButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBookButton)
+                    .addComponent(saveBookButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -107,6 +230,51 @@ public class adminBooksPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_addBookButtonActionPerformed
 
+    private void editBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBookButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = bookTable.getSelectedRow();
+        if (selectedIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a book to edit", "Cannot edit book", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        selectedBook = books.get(selectedIndex);
+        editBookNameTextField.setText(selectedBook.getBookname());
+        editBookAuthorTextField.setText(selectedBook.getAuthor());
+    }//GEN-LAST:event_editBookButtonActionPerformed
+
+    private void deleteBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBookButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = bookTable.getSelectedRow();
+        if (selectedIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a book to delete", "Cannot delete book", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            selectedBook = books.get(selectedIndex);
+            AdminDatabaseConnector.deleteBook(selectedBook);
+            JOptionPane.showMessageDialog(null, "User deleted successfully", "Successfully deleted", JOptionPane.INFORMATION_MESSAGE);
+            clearFields();
+            populateTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_deleteBookButtonActionPerformed
+
+    private void saveBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBookButtonActionPerformed
+        // TODO add your handling code here:
+        Book newBook = new Book();
+        try {
+            newBook.setBookname(editBookNameTextField.getText());
+            newBook.setAuthor(editBookAuthorTextField.getText());
+            AdminDatabaseConnector.editBook(selectedBook, newBook);
+            JOptionPane.showMessageDialog(null, "Book Edited Successfully", "Successful Edit", JOptionPane.INFORMATION_MESSAGE);
+            clearFields();
+            populateTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_saveBookButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBookButton;
@@ -115,5 +283,41 @@ public class adminBooksPanel extends javax.swing.JPanel {
     private javax.swing.JTextField authorTextField;
     private javax.swing.JLabel bookNameLabel;
     private javax.swing.JTextField bookNameTextField;
+    private javax.swing.JTable bookTable;
+    private javax.swing.JButton deleteBookButton;
+    private javax.swing.JLabel editBookAuthorLabel;
+    private javax.swing.JTextField editBookAuthorTextField;
+    private javax.swing.JButton editBookButton;
+    private javax.swing.JLabel editBookLabel;
+    private javax.swing.JLabel editBookNameLabel;
+    private javax.swing.JTextField editBookNameTextField;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton saveBookButton;
     // End of variables declaration//GEN-END:variables
+
+    public void populateTable() {
+        try {
+            this.books = AdminDatabaseConnector.getAllbooks();
+            DefaultTableModel model = (DefaultTableModel) bookTable.getModel();
+            model.setRowCount(0);
+            for (Book u: books) {
+                Object[] row = new Object[4];
+                row[0] = u.getBookId();
+                row[1] = u.getBookname();
+                row[2] = u.getAuthor();
+                row[3] = u.getIsAvailable();
+                model.addRow(row);
+            }
+            clearFields();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
+    private void clearFields() {
+        bookNameTextField.setText("");
+        authorTextField.setText("");
+        selectedBook = null;
+    }
+
 }

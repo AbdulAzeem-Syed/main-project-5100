@@ -19,10 +19,40 @@ public class AdminDatabaseConnector {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "password";
 
+    public static void getData() {
+        String querybook = "select count(*) from project.book";
+        String queryuser = "select count(*) from project.user";
+        String queryreport = "select count(*) from project.user_queries";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(querybook);
+            ResultSet rs = stmt.executeQuery(querybook);
+            rs.next();
+            int countbooks = rs.getInt(1);
+            
+            PreparedStatement stmt1 = conn.prepareStatement(queryuser);
+            ResultSet rs1 = stmt1.executeQuery(queryuser);
+            rs1.next();
+            int countusers = rs1.getInt(1);
+            
+            PreparedStatement stmt2 = conn.prepareStatement(queryreport);
+            ResultSet rs2 = stmt2.executeQuery(queryreport);
+            rs2.next();
+            int countreports = rs2.getInt(1);
+            
+            System.out.println("Total Users : " + countusers);
+            System.out.println("Total Books : " + countbooks);
+            System.out.println("Total Reports : " + countreports);
+//            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
     /**
      * Privatized constructor so as to not allow object creation
      */
-    private AdminDatabaseConnector() {
+    private AdminDatabaseConnector() {}
         
         
         public static void addBook(Book book) {
@@ -39,6 +69,8 @@ public class AdminDatabaseConnector {
             e.printStackTrace();
         }
     }
+        
+        
         
     public static ArrayList<Book> getAllbooks() {
 //        return list of users from db
