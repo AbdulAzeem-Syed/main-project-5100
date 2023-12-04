@@ -34,6 +34,7 @@ public class adminPanel extends javax.swing.JPanel {
         reportsButton = new javax.swing.JButton();
         booksButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
+        adminHomeButton = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
 
         adminSplitPane.setDividerSize(1);
@@ -44,6 +45,7 @@ public class adminPanel extends javax.swing.JPanel {
         adminLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         adminLabel.setText("ADMIN PANEL");
 
+        reportsButton.setBackground(new java.awt.Color(153, 153, 255));
         reportsButton.setText("Reports");
         reportsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,6 +53,7 @@ public class adminPanel extends javax.swing.JPanel {
             }
         });
 
+        booksButton.setBackground(new java.awt.Color(153, 153, 255));
         booksButton.setText("Books");
         booksButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,10 +61,19 @@ public class adminPanel extends javax.swing.JPanel {
             }
         });
 
+        logoutButton.setBackground(new java.awt.Color(153, 153, 255));
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutButtonActionPerformed(evt);
+            }
+        });
+
+        adminHomeButton.setBackground(new java.awt.Color(153, 153, 255));
+        adminHomeButton.setText("Admin Home");
+        adminHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminHomeButtonActionPerformed(evt);
             }
         });
 
@@ -70,17 +82,20 @@ public class adminPanel extends javax.swing.JPanel {
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addGap(268, 268, 268)
-                .addComponent(adminLabel)
-                .addContainerGap(278, Short.MAX_VALUE))
-            .addGroup(topPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(booksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(adminLabel))
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(adminHomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(booksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(reportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,10 +103,11 @@ public class adminPanel extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(adminLabel)
                 .addGap(15, 15, 15)
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(booksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(reportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(adminHomeButton)
+                    .addComponent(reportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -137,8 +153,17 @@ public class adminPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    private void adminHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminHomeButtonActionPerformed
+        // TODO add your handling code here:
+        adminHomePanel newadminHomePanel = new adminHomePanel(bottomPanel);
+        bottomPanel.add(newadminHomePanel);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_adminHomeButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton adminHomeButton;
     private javax.swing.JLabel adminLabel;
     private javax.swing.JSplitPane adminSplitPane;
     private javax.swing.JButton booksButton;
