@@ -8,7 +8,7 @@ public class Book {
     private int bookId;
     private String bookname;
     private String author;
-    private boolean isAvailableOffline;
+    private boolean isAvailable;
 
     public String getAuthor() {
         return author;
@@ -34,11 +34,11 @@ public class Book {
         this.bookname = bookname;
     }
 
-    public boolean isAvailableOffline() {
-        return isAvailableOffline;
+    public boolean getIsAvailable() {
+        return isAvailable;
     }
 
-    public void setIsAvailableOffline(boolean isAvailableOffline) {
-        this.isAvailableOffline = isAvailableOffline;
+    public void setIsAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 }
