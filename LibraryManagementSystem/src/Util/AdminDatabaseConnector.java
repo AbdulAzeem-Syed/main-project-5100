@@ -22,7 +22,7 @@ public class AdminDatabaseConnector {
     /**
      * Privatized constructor so as to not allow object creation
      */
-    private AdminDatabaseConnector() {
+    private AdminDatabaseConnector() {}
         
         
         public static void addBook(Book book) {
