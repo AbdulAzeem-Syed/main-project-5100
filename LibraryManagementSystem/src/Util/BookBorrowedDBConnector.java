@@ -37,7 +37,7 @@ public class BookBorrowedDBConnector  {
             stmt.setInt(1, bookBorrowed.getBorrowId());
             stmt.setInt(2, bookBorrowed.getBookId());
             stmt.setInt(3, bookBorrowed.getUserId());
-            stmt.setDate(4, new java.sql.Date(bookBorrowed.getDueDate()));
+            stmt.setDate(4, new java.sql.Date(bookBorrowed.getDueDate().getTime()));
             stmt.setString(5, bookBorrowed.getStatus());
             int rows = stmt.executeUpdate();
             System.out.println("Rows impacted : " + rows);
