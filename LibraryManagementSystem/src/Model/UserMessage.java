@@ -2,7 +2,7 @@ package Model;
 
 /**
  *
- * @author Abdul
+ * @author Lohitha Atluri
  */
 public class UserMessage {
     private int queryId;
