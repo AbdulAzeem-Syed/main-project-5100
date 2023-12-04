@@ -5,9 +5,11 @@
 package UI;
 
 import Model.Book;
+import Model.UserMessage;
 import java.awt.desktop.UserSessionEvent;
 import java.util.ArrayList;
 import Util.AdminDatabaseConnector;
+import Util.UserMessageDBConnector;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +26,7 @@ public class adminBooksPanel extends javax.swing.JPanel {
      */
     private ArrayList<Book> books;
     private Book selectedBook;
+
     
     public adminBooksPanel(JPanel bottomPanel) {
         initComponents();
@@ -107,9 +110,19 @@ public class adminBooksPanel extends javax.swing.JPanel {
 
         editBookButton.setBackground(new java.awt.Color(153, 153, 255));
         editBookButton.setText("Edit");
+        editBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBookButtonActionPerformed(evt);
+            }
+        });
 
         deleteBookButton.setBackground(new java.awt.Color(153, 153, 255));
         deleteBookButton.setText("Delete");
+        deleteBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBookButtonActionPerformed(evt);
+            }
+        });
 
         editBookNameLabel.setText("Name:");
 
@@ -117,6 +130,11 @@ public class adminBooksPanel extends javax.swing.JPanel {
 
         saveBookButton.setBackground(new java.awt.Color(153, 153, 255));
         saveBookButton.setText("Save");
+        saveBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBookButtonActionPerformed(evt);
+            }
+        });
 
         editBookLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         editBookLabel.setText("Edit Books");
@@ -211,6 +229,51 @@ public class adminBooksPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_addBookButtonActionPerformed
+
+    private void editBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBookButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = bookTable.getSelectedRow();
+        if (selectedIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a book to edit", "Cannot edit book", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        selectedBook = books.get(selectedIndex);
+        editBookNameTextField.setText(selectedBook.getBookname());
+        editBookAuthorTextField.setText(selectedBook.getAuthor());
+    }//GEN-LAST:event_editBookButtonActionPerformed
+
+    private void deleteBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBookButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = bookTable.getSelectedRow();
+        if (selectedIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a book to delete", "Cannot delete book", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            selectedBook = books.get(selectedIndex);
+            AdminDatabaseConnector.deleteBook(selectedBook);
+            JOptionPane.showMessageDialog(null, "User deleted successfully", "Successfully deleted", JOptionPane.INFORMATION_MESSAGE);
+            clearFields();
+            populateTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_deleteBookButtonActionPerformed
+
+    private void saveBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBookButtonActionPerformed
+        // TODO add your handling code here:
+        Book newBook = new Book();
+        try {
+            newBook.setBookname(editBookNameTextField.getText());
+            newBook.setAuthor(editBookAuthorTextField.getText());
+            AdminDatabaseConnector.editBook(selectedBook, newBook);
+            JOptionPane.showMessageDialog(null, "Book Edited Successfully", "Successful Edit", JOptionPane.INFORMATION_MESSAGE);
+            clearFields();
+            populateTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_saveBookButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
