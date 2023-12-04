@@ -6,6 +6,7 @@ package UI;
 
 import Model.Book;
 import Model.User;
+import Util.BookBorrowedDBConnector;
 import Util.BookJDBConnector;
 import Util.UserJDBConnector;
 import java.awt.Image;
@@ -45,6 +46,7 @@ public class Homepage extends javax.swing.JPanel {
         logo.setIcon(new ImageIcon(edited_image));
         requestBorrowButton.setVisible(false);
         contactUsButton.setVisible(false);
+        booksTable.removeColumn(booksTable.getColumnModel().getColumn(3));
         }
         catch(Exception e)
         {
@@ -62,6 +64,7 @@ public class Homepage extends javax.swing.JPanel {
         Image edited_image = img.getScaledInstance(245, 104, Image.SCALE_SMOOTH);
         logo.setText("");
         logo.setIcon(new ImageIcon(edited_image));
+        booksTable.removeColumn(booksTable.getColumnModel().getColumn(3));
         }
         catch(Exception e)
         {
@@ -92,17 +95,17 @@ public class Homepage extends javax.swing.JPanel {
 
         booksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Title", "Author", "Physical Copy"
+                "Title", "Author", "Physical Copy", "BookId"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -111,6 +114,10 @@ public class Homepage extends javax.swing.JPanel {
         });
         booksTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(booksTable);
+        if (booksTable.getColumnModel().getColumnCount() > 0) {
+            booksTable.getColumnModel().getColumn(3).setResizable(false);
+            booksTable.getColumnModel().getColumn(3).setPreferredWidth(0);
+        }
 
         searchBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +140,11 @@ public class Homepage extends javax.swing.JPanel {
         });
 
         requestBorrowButton.setText("Borrow");
+        requestBorrowButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestBorrowButtonActionPerformed(evt);
+            }
+        });
 
         logo.setText("logo");
 
@@ -240,6 +252,39 @@ public class Homepage extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_viewBookActionPerformed
 
+    private void requestBorrowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBorrowButtonActionPerformed
+        int selectedIndex = booksTable.getSelectedRow();
+        if(selectedIndex == -1)
+        {
+            JOptionPane.showMessageDialog(this, "No book selected", "Error", HEIGHT);
+            return;
+        }
+        try
+        {
+            selectedBook = books.get(selectedIndex);
+            System.out.println("BookId for add borrow Info");
+            System.out.println(selectedBook.getBookId());
+            var borrowedBooks = BookBorrowedDBConnector.getAllBookBorrowed();
+            var checkBorrowedBook = borrowedBooks.stream().filter(x -> x.getBookId() == selectedBook.getBookId() && x.getUserId() == userDetails.getUserId()).findFirst().orElse(null);
+            if(checkBorrowedBook != null)
+            {
+                String outputMessage = "ERROR \nYou have already requested this book. If not yet picked, please visit the library reciption and pick your book";
+                JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+            }
+            else
+            {
+                BookBorrowedDBConnector.addBorrowInfo(selectedBook.getBookId(), userDetails.getUserId());
+            
+                String outputMessage = "SUCCESS \nSent a borrow request to librarian, please visit the library reciption and pick your book";
+                JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+            }
+        }
+        catch(Exception e)
+        {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", HEIGHT);
+        }
+    }//GEN-LAST:event_requestBorrowButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable booksTable;
@@ -258,10 +303,11 @@ public class Homepage extends javax.swing.JPanel {
         model.setRowCount(0);
         for(Book b : books)
         {
-            Object [] row = new Object[3];
+            Object [] row = new Object[4];
             row[0] = b.getBookname();
             row[1] = b.getAuthor();
             row[2] = b.getIsAvailable() ? "Available": "Not Available";
+            row[3] = b.getBookId();
             model.addRow(row);
         }
     }
