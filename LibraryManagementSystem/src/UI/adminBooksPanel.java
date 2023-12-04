@@ -4,6 +4,9 @@
  */
 package UI;
 
+import Model.Book;
+import Util.AdminDatabaseConnector;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -29,32 +32,88 @@ public class adminBooksPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         addBooksLabel = new javax.swing.JLabel();
+        bookNameLabel = new javax.swing.JLabel();
+        bookNameTextField = new javax.swing.JTextField();
+        authorLabel = new javax.swing.JLabel();
+        authorTextField = new javax.swing.JTextField();
+        addBookButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
         addBooksLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         addBooksLabel.setText("Add Books");
 
+        bookNameLabel.setText("Name:");
+
+        authorLabel.setText("Author:");
+
+        addBookButton.setText("Submit");
+        addBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBookButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(addBooksLabel)
-                .addContainerGap(512, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(279, 279, 279)
+                        .addComponent(addBooksLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(bookNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bookNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(authorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(authorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addBookButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(addBooksLabel)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bookNameLabel)
+                    .addComponent(bookNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(authorLabel)
+                    .addComponent(authorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addBookButton))
+                .addContainerGap(334, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookButtonActionPerformed
+        // TODO add your handling code here:
+        Book newBook = new Book();
+        try {
+            newBook.setBookname(bookNameTextField.getText());
+            newBook.setAuthor(authorTextField.getText());
+            
+
+            AdminDatabaseConnector.addBook(newBook);
+            JOptionPane.showMessageDialog(null, "Book Registered Successfully", "Successful Registration", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_addBookButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBookButton;
     private javax.swing.JLabel addBooksLabel;
+    private javax.swing.JLabel authorLabel;
+    private javax.swing.JTextField authorTextField;
+    private javax.swing.JLabel bookNameLabel;
+    private javax.swing.JTextField bookNameTextField;
     // End of variables declaration//GEN-END:variables
 }
