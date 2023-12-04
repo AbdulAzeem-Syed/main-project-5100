@@ -180,7 +180,7 @@ public class adminReportsPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedIndex = reportsTable.getSelectedRow();
         if (selectedIndex == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a user to delete", "Cannot delete user", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select a report to delete", "Cannot delete report", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
@@ -199,7 +199,7 @@ public class adminReportsPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedIndex = reportsTable.getSelectedRow();
         if (selectedIndex == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a user to edit", "Cannot edit user", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select a report to edit", "Cannot view report", JOptionPane.ERROR_MESSAGE);
             return;
         }
         selectedUserMessage = usermessage.get(selectedIndex);
