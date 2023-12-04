@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import Model.Book;
 import Model.User;
+import javax.swing.JPanel;
 /**
  *
  * @author Amer
@@ -25,7 +26,7 @@ public class SearchBookPanel extends javax.swing.JPanel {
     /**
      * Creates new form ReportPanel
      */
-    public SearchBookPanel() {
+    public SearchBookPanel(JPanel bottomPanel) {
         initComponents();
         populateTable();
     }

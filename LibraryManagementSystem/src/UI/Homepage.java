@@ -205,11 +205,11 @@ public class Homepage extends javax.swing.JPanel {
         Book book1 = new Book();
         book1.setName("Test1");
         book1.setAuthor("Test Author1");
-        book1.setIsAvailableOffline(true);
+        book1.setIsAvailable(true);
         Book book2 = new Book();
         book2.setName("Test2");
         book2.setAuthor("Test Author2");
-        book2.setIsAvailableOffline(false);
+        book2.setIsAvailable(false);
         this.books.add(book1);
         this.books.add(book2);//DatabaseConnector.getAllCustomers();
         DefaultTableModel model = (DefaultTableModel) booksTable.getModel();
@@ -219,7 +219,7 @@ public class Homepage extends javax.swing.JPanel {
             Object [] row = new Object[3];
             row[0] = b.getName();
             row[1] = b.getAuthor();
-            row[2] = b.isAvailableOffline() ? "Available": "Not Available";
+            row[2] = b.getIsAvailable() ? "Available": "Not Available";
             model.addRow(row);
         }
     }

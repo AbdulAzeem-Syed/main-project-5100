@@ -11,6 +11,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import Model.User;
+import javax.swing.JPanel;
 /**
  *
  * @author amer2
@@ -22,7 +23,7 @@ public class SearchUserJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SearchUserJPanel
      */
-    public SearchUserJPanel() {
+    public SearchUserJPanel(JPanel bottomPanel) {
         initComponents();
         populateTable();
     }

@@ -35,7 +35,7 @@ public class Book {
     }
 
     public boolean getIsAvailable() {
-        return isAvailableOffline;
+        return isAvailable;
     }
 
     public void setIsAvailable(boolean isAvailable) {
