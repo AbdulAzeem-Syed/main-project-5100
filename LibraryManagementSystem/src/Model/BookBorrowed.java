@@ -4,7 +4,7 @@
  */
 package Model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -15,7 +15,7 @@ public class BookBorrowed {
     private int bookId;
     private int userId;
     private String Status;
-    private LocalDate dueDate;
+    private Date dueDate;
     private String bookName;
     private String userName;
 
@@ -51,11 +51,11 @@ public class BookBorrowed {
         this.Status = Status;
     }
 
-    public LocalDate getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -74,4 +74,5 @@ public class BookBorrowed {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
 }
