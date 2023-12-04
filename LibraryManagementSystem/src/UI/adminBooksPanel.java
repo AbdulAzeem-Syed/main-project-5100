@@ -5,6 +5,7 @@
 package UI;
 
 import Model.Book;
+import Util.BookJDBConnector;
 import Model.UserMessage;
 import java.awt.desktop.UserSessionEvent;
 import java.util.ArrayList;
@@ -223,7 +224,7 @@ public class adminBooksPanel extends javax.swing.JPanel {
             newBook.setAuthor(authorTextField.getText());
             
 
-            AdminDatabaseConnector.addBook(newBook);
+            BookJDBConnector.addBook(newBook);
             JOptionPane.showMessageDialog(null, "Book Registered Successfully", "Successful Registration", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());

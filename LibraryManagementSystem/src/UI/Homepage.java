@@ -201,11 +201,11 @@ public class Homepage extends javax.swing.JPanel {
     public void updateTable()
     {
         Book book1 = new Book();
-        book1.setName("Test1");
+        book1.setBookname("Test1");
         book1.setAuthor("Test Author1");
         book1.setIsAvailable(true);
         Book book2 = new Book();
-        book2.setName("Test2");
+        book2.setBookname("Test2");
         book2.setAuthor("Test Author2");
         book2.setIsAvailable(false);
         this.books.add(book1);
@@ -215,7 +215,7 @@ public class Homepage extends javax.swing.JPanel {
         for(Book b : books)
         {
             Object [] row = new Object[3];
-            row[0] = b.getName();
+            row[0] = b.getBookname();
             row[1] = b.getAuthor();
             row[2] = b.getIsAvailable() ? "Available": "Not Available";
             model.addRow(row);

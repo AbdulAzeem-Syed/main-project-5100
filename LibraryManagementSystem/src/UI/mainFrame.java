@@ -4,9 +4,13 @@
  */
 package UI;
 
+import Model.User;
+import Util.UserJDBConnector;
 import java.awt.Color;
+import static java.awt.image.ImageObserver.HEIGHT;
 import java.lang.invoke.MethodHandles;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,11 +36,11 @@ public class mainFrame extends javax.swing.JFrame {
 
         loginPanel = new javax.swing.JPanel();
         LoginTextLabel = new javax.swing.JLabel();
-        userNameLabel = new javax.swing.JLabel();
+        loginUserEmailLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         newNameLabel = new javax.swing.JLabel();
         newPasswordLabel = new javax.swing.JLabel();
-        userNameTextField = new javax.swing.JTextField();
+        loginUserEmailTextField = new javax.swing.JTextField();
         newNameTextField = new javax.swing.JTextField();
         passwordPasswordField = new javax.swing.JPasswordField();
         newPasswordPasswordField = new javax.swing.JPasswordField();
@@ -60,9 +64,9 @@ public class mainFrame extends javax.swing.JFrame {
         LoginTextLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LoginTextLabel.setText("Login ");
 
-        userNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        userNameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        userNameLabel.setText("User Name");
+        loginUserEmailLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        loginUserEmailLabel.setForeground(new java.awt.Color(255, 255, 255));
+        loginUserEmailLabel.setText("Email");
 
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -183,14 +187,14 @@ public class mainFrame extends javax.swing.JFrame {
                     .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(newNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loginUserEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(registerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(newNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                     .addComponent(newPasswordPasswordField, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(confirmNewPasswordPasswordField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(userNameTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(loginUserEmailTextField, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(passwordPasswordField, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,8 +210,8 @@ public class mainFrame extends javax.swing.JFrame {
                 .addComponent(LoginTextLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loginUserEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loginUserEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(passwordPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,6 +266,23 @@ public class mainFrame extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
+        User user = UserJDBConnector.getUserByEmail(loginUserEmailTextField.getText());
+        
+        if(user== null || user.getEmail() == null)
+        {
+            String outputMessage = "Invalid Email";
+            JOptionPane.showMessageDialog(this, outputMessage, "Error", HEIGHT);
+        }
+        if(user.getPassword().equals(passwordPasswordField.getText())){
+     
+            setContentPane(new LibrarianPanel());
+            invalidate();
+            validate();
+        }
+        else{
+        String outputMessage = "Invalid Password";
+        JOptionPane.showMessageDialog(this, outputMessage, "Error", HEIGHT);
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void passwordPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordPasswordFieldActionPerformed
@@ -312,6 +333,7 @@ public class mainFrame extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
@@ -384,6 +406,8 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JButton guestLoginButton;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginPanel;
+    private javax.swing.JLabel loginUserEmailLabel;
+    private javax.swing.JTextField loginUserEmailTextField;
     private javax.swing.JLabel newNameLabel;
     private javax.swing.JTextField newNameTextField;
     private javax.swing.JLabel newPasswordLabel;
@@ -392,7 +416,5 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordPasswordField;
     private javax.swing.JButton registerButton;
     private javax.swing.JLabel signUpTextLabel;
-    private javax.swing.JLabel userNameLabel;
-    private javax.swing.JTextField userNameTextField;
     // End of variables declaration//GEN-END:variables
 }
