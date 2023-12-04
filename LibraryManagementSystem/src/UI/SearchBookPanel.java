@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package UI;
-import Util.UserJDBConnector;
+import Util.BookJDBConnector;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -45,7 +45,7 @@ public class SearchBookPanel extends javax.swing.JPanel {
         searchTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        userTable = new javax.swing.JTable();
+        bookTable = new javax.swing.JTable();
         searchButtonButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -60,7 +60,7 @@ public class SearchBookPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Search Box");
 
-        userTable.setModel(new javax.swing.table.DefaultTableModel(
+        bookTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -83,7 +83,7 @@ public class SearchBookPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(userTable);
+        jScrollPane1.setViewportView(bookTable);
 
         searchButtonButton.setBackground(new java.awt.Color(0, 153, 0));
         searchButtonButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -188,6 +188,7 @@ public class SearchBookPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable bookTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -195,18 +196,18 @@ public class SearchBookPanel extends javax.swing.JPanel {
     private javax.swing.JButton searchButtonButton;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JPanel searchUserPanel;
-    private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 
   public void populateTable() {
         try {
             this.book = BookJDBConnector.getAllBooks();
-            DefaultTableModel model = (DefaultTableModel) userTable.getModel();
+            DefaultTableModel model = (DefaultTableModel) bookTable.getModel();
             model.setRowCount(0);
-            for (Book u: books) {
-                Object[] row = new Object[3];
+            for (Book u: book) {
+                Object[] row = new Object[4];
                 row[0] = u.getBookId();
-                row[1] = u.getName();
+                row[1] = u.getBookname();
+                System.out.println(u.getBookname());
                 row[2] = u.getAuthor();
                 row[3] = u.getIsAvailable();
                

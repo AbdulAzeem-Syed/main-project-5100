@@ -31,7 +31,7 @@ public class Book {
     }
 
     public void setBookname(String name) {
-        this.bookname = bookname;
+        this.bookname = name;
     }
 
     public boolean getIsAvailable() {
