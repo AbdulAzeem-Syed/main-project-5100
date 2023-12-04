@@ -126,10 +126,15 @@ public class adminPanel extends javax.swing.JPanel {
 
     private void reportsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsButtonActionPerformed
         // TODO add your handling code here:
+        adminReportsPanel newadReportsPanel = new adminReportsPanel(bottomPanel);
+        bottomPanel.add(newadReportsPanel);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_reportsButtonActionPerformed
 
     private void logotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logotButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_logotButtonActionPerformed
 
 
