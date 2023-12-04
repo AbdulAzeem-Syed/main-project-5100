@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -27,7 +28,7 @@ public class BorrowBookInfo extends javax.swing.JPanel {
      */
     private ArrayList<BookBorrowed> booksBorrowed = new ArrayList();
     private BookBorrowed selectedBook;
-    public BorrowBookInfo() {
+    public BorrowBookInfo(JPanel bottomPanel) {
         initComponents();
         updateTable();
         borrowerInfoTable.removeColumn(borrowerInfoTable.getColumnModel().getColumn(4));
