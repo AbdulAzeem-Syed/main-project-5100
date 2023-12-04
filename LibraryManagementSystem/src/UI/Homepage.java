@@ -5,13 +5,18 @@
 package UI;
 
 import Model.Book;
+import Model.User;
+import Util.BookJDBConnector;
+import Util.UserJDBConnector;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import static java.awt.image.ImageObserver.HEIGHT;
 import java.io.File;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -27,9 +32,30 @@ public class Homepage extends javax.swing.JPanel {
      * Creates new form Homepage
      */
     private ArrayList<Book> books = new ArrayList();
+    private Book selectedBook;
+    private User userDetails = null;
     public Homepage() {
         initComponents();
         updateTable();
+        try{
+        File file = new File("Logo.png");
+        BufferedImage img = ImageIO.read(file);
+        Image edited_image = img.getScaledInstance(245, 104, Image.SCALE_SMOOTH);
+        logo.setText("");
+        logo.setIcon(new ImageIcon(edited_image));
+        requestBorrowButton.setVisible(false);
+        contactUsButton.setVisible(false);
+        }
+        catch(Exception e)
+        {
+            System.out.print(e);
+        }
+    }
+    
+    public Homepage(User user) {
+        initComponents();
+        updateTable();
+        userDetails = user;
         try{
         File file = new File("Logo.png");
         BufferedImage img = ImageIO.read(file);
@@ -62,6 +88,7 @@ public class Homepage extends javax.swing.JPanel {
         contactUsButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(800, 550));
 
         booksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,6 +126,11 @@ public class Homepage extends javax.swing.JPanel {
         });
 
         viewBook.setText("View");
+        viewBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewBookActionPerformed(evt);
+            }
+        });
 
         requestBorrowButton.setText("Borrow");
 
@@ -118,36 +150,36 @@ public class Homepage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(logo)
-                        .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
-                            .addComponent(searchBook))
+                            .addComponent(jScrollPane1)
+                            .addComponent(searchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(viewBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(viewBook, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(25, 25, 25)
                                 .addComponent(requestBorrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(contactUsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25))))))
+                                .addComponent(contactUsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(logo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(searchBook))
+                    .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -155,11 +187,11 @@ public class Homepage extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(viewBook, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                            .addComponent(requestBorrowButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(viewBook, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(requestBorrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(contactUsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -187,6 +219,27 @@ public class Homepage extends javax.swing.JPanel {
         topFrame.validate();
     }//GEN-LAST:event_contactUsButtonActionPerformed
 
+    private void viewBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBookActionPerformed
+        int selectedIndex = booksTable.getSelectedRow();
+        if(selectedIndex == -1)
+        {
+            JOptionPane.showMessageDialog(this, "No book selected", "Error", HEIGHT);
+            return;
+        }
+        try
+        {
+            selectedBook = books.get(selectedIndex);
+            JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            topFrame.setContentPane(new BookView(userDetails, selectedBook.getBookname()));
+            topFrame.invalidate();
+            topFrame.validate();
+        }
+        catch(Exception e)
+        {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", HEIGHT);
+        }
+    }//GEN-LAST:event_viewBookActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable booksTable;
@@ -200,16 +253,7 @@ public class Homepage extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     public void updateTable()
     {
-        Book book1 = new Book();
-        book1.setBookname("Test1");
-        book1.setAuthor("Test Author1");
-        book1.setIsAvailable(true);
-        Book book2 = new Book();
-        book2.setBookname("Test2");
-        book2.setAuthor("Test Author2");
-        book2.setIsAvailable(false);
-        this.books.add(book1);
-        this.books.add(book2);//DatabaseConnector.getAllCustomers();
+        this.books = BookJDBConnector.getAllBooks();
         DefaultTableModel model = (DefaultTableModel) booksTable.getModel();
         model.setRowCount(0);
         for(Book b : books)
