@@ -88,11 +88,12 @@ public class BookBorrowedDBConnector  {
      * 
      */
     public static void deleteBookBorrowed(BookBorrowed u) {
-        String query = "delete from book_borrowed where id = ?";
+        String query = "delete from book_borrowed where bookId = ? AND userId = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, u.getBorrowId());
+            stmt.setInt(1, u.getBookId());
+            stmt.setInt(2, u.getUserId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
