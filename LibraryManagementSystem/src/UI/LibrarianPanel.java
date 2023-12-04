@@ -5,7 +5,7 @@
 package UI;
 
 import Model.User;
-import Util.DatabaseConnector;
+import Util.UserJDBConnector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Graphics;
@@ -56,7 +56,7 @@ public class LibrarianPanel extends javax.swing.JPanel {
         searchUserButton = new javax.swing.JButton();
         searchTextField = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        userTable = new javax.swing.JTable();
 
         jSplitPane1.setDividerLocation(95);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -118,7 +118,7 @@ public class LibrarianPanel extends javax.swing.JPanel {
         searchUserButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchUserButton.setText("Search");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -141,13 +141,13 @@ public class LibrarianPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane2.setViewportView(userTable);
+        if (userTable.getColumnModel().getColumnCount() > 0) {
+            userTable.getColumnModel().getColumn(0).setResizable(false);
+            userTable.getColumnModel().getColumn(1).setResizable(false);
+            userTable.getColumnModel().getColumn(2).setResizable(false);
+            userTable.getColumnModel().getColumn(3).setResizable(false);
+            userTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
@@ -211,17 +211,17 @@ public class LibrarianPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JButton searchUserButton;
     private javax.swing.JPanel topPanel;
     private javax.swing.JButton userButton;
     private javax.swing.JLabel userLabel;
+    private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 private void populateData() {
         try {
-            this.users = DatabaseConnector.getAllusers();
+            this.users = UserJDBConnector.getAllUsers();
             DefaultTableModel model = (DefaultTableModel) userTable.getModel();
             model.setRowCount(0);
             for (User u : users) {
