@@ -111,6 +111,9 @@ public class adminHomePanel extends javax.swing.JPanel {
     private void refreshSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshSummaryButtonActionPerformed
         // TODO add your handling code here:
         AdminDatabaseConnector.getData();
+ //       totalBooksTextField.setText();
+ //       totalUsersTextField.setText();
+ //       totalReportsTextField.setText();
         
     }//GEN-LAST:event_refreshSummaryButtonActionPerformed
 
