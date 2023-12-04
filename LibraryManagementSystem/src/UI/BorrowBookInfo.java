@@ -52,6 +52,7 @@ public class BorrowBookInfo extends javax.swing.JPanel {
         updateBookStatus = new javax.swing.JButton();
         Submit = new javax.swing.JButton();
         bookNameLabel = new javax.swing.JLabel();
+        deleteBorrowInfoButton = new javax.swing.JButton();
 
         borrowerInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,6 +111,13 @@ public class BorrowBookInfo extends javax.swing.JPanel {
 
         bookNameLabel.setText("jLabel1");
 
+        deleteBorrowInfoButton.setText("Delete Entry");
+        deleteBorrowInfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBorrowInfoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,18 +129,21 @@ public class BorrowBookInfo extends javax.swing.JPanel {
                     .addComponent(searchBorowerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(updateBookStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(statusType, 0, 100, Short.MAX_VALUE)
-                        .addComponent(Submit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(updateBookStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(statusType, 0, 100, Short.MAX_VALUE)
+                            .addComponent(Submit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(deleteBorrowInfoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(bookNameLabel))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(101, Short.MAX_VALUE)
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(searchBorowerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -141,7 +152,9 @@ public class BorrowBookInfo extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
-                        .addComponent(updateBookStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(deleteBorrowInfoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(updateBookStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                         .addGap(30, 30, 30)
                         .addComponent(bookNameLabel)
                         .addGap(30, 30, 30)
@@ -214,11 +227,35 @@ public class BorrowBookInfo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_updateBookStatusActionPerformed
 
+    private void deleteBorrowInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBorrowInfoButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = borrowerInfoTable.getSelectedRow();
+        if(selectedIndex == -1)
+        {
+            JOptionPane.showMessageDialog(this, "No book selected", "Error", HEIGHT);
+            return;
+        }
+        try
+        {
+            selectedBook = booksBorrowed.get(selectedIndex);
+            BookBorrowedDBConnector.deleteBookBorrowed(selectedBook);
+            String outputMessage = "Delete successfull";
+            JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+            cleanup();
+            updateTable();
+        }
+        catch(Exception e)
+        {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", HEIGHT);
+        }
+    }//GEN-LAST:event_deleteBorrowInfoButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Submit;
     private javax.swing.JLabel bookNameLabel;
     private javax.swing.JTable borrowerInfoTable;
+    private javax.swing.JButton deleteBorrowInfoButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField searchBorowerInfo;
     private javax.swing.JButton searchButton;
@@ -227,18 +264,6 @@ public class BorrowBookInfo extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     public void updateTable()
     {
-        BookBorrowed book1 = new BookBorrowed();
-        book1.setUserName("TestUser1");
-        book1.setBookName("Test book1");
-        book1.setStatus("Requested");
-        //book1.setDueDate(Date);
-        BookBorrowed book2 = new BookBorrowed();
-        book2.setUserName("TestUser2");
-        book2.setBookName("Test book2");
-        book2.setStatus("Borrowed");
-        //book2.setDueDate(LocalDate.now());
-        //this.booksBorrowed.add(book1);
-        //this.booksBorrowed.add(book2);
         this.booksBorrowed = BookBorrowedDBConnector.getAllBookBorrowed();
         
         DefaultTableModel model = (DefaultTableModel) borrowerInfoTable.getModel();

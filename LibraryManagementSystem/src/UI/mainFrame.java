@@ -269,7 +269,7 @@ public class mainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, outputMessage, "Error", HEIGHT);
         }
         if(user.getPassword().equals(passwordPasswordField.getText())){
-            if(user.getRole().equals("Member")){
+            if(user.getRole().equals("Member") || user.getRole().equals("Freezed Member")){
                 setContentPane(new Homepage(user));
                 invalidate();
                 validate();

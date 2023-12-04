@@ -89,6 +89,7 @@ public class Homepage extends javax.swing.JPanel {
         requestBorrowButton = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
         contactUsButton = new javax.swing.JButton();
+        viewBooksButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(800, 550));
@@ -155,16 +156,20 @@ public class Homepage extends javax.swing.JPanel {
             }
         });
 
+        viewBooksButton.setText("Borrowed Books");
+        viewBooksButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewBooksButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(logo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
@@ -180,15 +185,25 @@ public class Homepage extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(contactUsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(25, 25, 25))
+                                .addComponent(contactUsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(logo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(viewBooksButton)
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(logo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(logo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(viewBooksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(searchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,7 +218,7 @@ public class Homepage extends javax.swing.JPanel {
                             .addComponent(requestBorrowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(contactUsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -226,7 +241,7 @@ public class Homepage extends javax.swing.JPanel {
     private void contactUsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactUsButtonActionPerformed
         // TODO add your handling code here:
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.setContentPane(new QueryPanel());
+        topFrame.setContentPane(new QueryPanel(userDetails));
         topFrame.invalidate();
         topFrame.validate();
     }//GEN-LAST:event_contactUsButtonActionPerformed
@@ -254,6 +269,11 @@ public class Homepage extends javax.swing.JPanel {
 
     private void requestBorrowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBorrowButtonActionPerformed
         int selectedIndex = booksTable.getSelectedRow();
+        if(userDetails.getRole().equals("Freezed Member"))
+        {
+            JOptionPane.showMessageDialog(this, "Your account has been frozen, please return any book if you are due", "Error", HEIGHT);
+            return;
+        }
         if(selectedIndex == -1)
         {
             JOptionPane.showMessageDialog(this, "No book selected", "Error", HEIGHT);
@@ -285,6 +305,13 @@ public class Homepage extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_requestBorrowButtonActionPerformed
 
+    private void viewBooksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBooksButtonActionPerformed
+        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.setContentPane(new UserBooks(userDetails));
+        topFrame.invalidate();
+        topFrame.validate();
+    }//GEN-LAST:event_viewBooksButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable booksTable;
@@ -295,6 +322,7 @@ public class Homepage extends javax.swing.JPanel {
     private javax.swing.JTextField searchBook;
     private javax.swing.JButton searchButton;
     private javax.swing.JButton viewBook;
+    private javax.swing.JButton viewBooksButton;
     // End of variables declaration//GEN-END:variables
     public void updateTable()
     {
