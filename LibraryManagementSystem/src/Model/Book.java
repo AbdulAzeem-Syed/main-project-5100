@@ -30,8 +30,8 @@ public class Book {
         return bookname;
     }
 
-    public void setBookname(String bookname) {
-        this.bookname = bookname;
+    public void setBookname(String name) {
+        this.bookname = name;
     }
 
     public boolean getIsAvailable() {

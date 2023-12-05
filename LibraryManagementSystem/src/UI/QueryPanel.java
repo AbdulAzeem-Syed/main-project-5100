@@ -6,22 +6,27 @@
 package UI;
 
 
+import Model.User;
 import java.awt.Color;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import Model.UserMessage;
 import Util.UserMessageDBConnector;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author Lohitha Atluri
  */
 public class QueryPanel extends javax.swing.JPanel {
 
+    private User userDetails = null;
     /**
      * Creates new form QueryPanel
      */
-    public QueryPanel() {
+    public QueryPanel(User user) {
         initComponents();
+        userDetails = user;
     }
 
     /**
@@ -33,7 +38,7 @@ public class QueryPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        commentonbuttonGroup = new javax.swing.ButtonGroup();
+        commentTypeButtonGroup = new javax.swing.ButtonGroup();
         queryPanel = new javax.swing.JPanel();
         headingLabel = new javax.swing.JLabel();
         commentLabel = new javax.swing.JLabel();
@@ -45,10 +50,11 @@ public class QueryPanel extends javax.swing.JPanel {
         submitButton = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
         feedbackRadioButton = new javax.swing.JRadioButton();
-        emailLabel = new javax.swing.JLabel();
-        emailTextField = new javax.swing.JTextField();
+        backButton = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(700, 500));
+
+        queryPanel.setBackground(new java.awt.Color(142, 199, 61));
 
         headingLabel.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         headingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -57,11 +63,18 @@ public class QueryPanel extends javax.swing.JPanel {
 
         commentLabel.setText("Comment Type:");
 
-        commentonbuttonGroup.add(complaintRadioButton);
-        complaintRadioButton.setText("Complaint");
+        commentTypeButtonGroup.add(complaintRadioButton);
+        complaintRadioButton.setText("Report");
+        complaintRadioButton.setActionCommand("REPORT");
+        complaintRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                complaintRadioButtonActionPerformed(evt);
+            }
+        });
 
-        commentonbuttonGroup.add(queryRadioButton);
+        commentTypeButtonGroup.add(queryRadioButton);
         queryRadioButton.setText("Query");
+        queryRadioButton.setActionCommand("QUERY");
         queryRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 queryRadioButtonActionPerformed(evt);
@@ -88,14 +101,14 @@ public class QueryPanel extends javax.swing.JPanel {
             }
         });
 
-        commentonbuttonGroup.add(feedbackRadioButton);
+        commentTypeButtonGroup.add(feedbackRadioButton);
         feedbackRadioButton.setText("Feedback");
+        feedbackRadioButton.setActionCommand("FEEDBACK");
 
-        emailLabel.setText("Email:");
-
-        emailTextField.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailTextFieldActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -103,18 +116,23 @@ public class QueryPanel extends javax.swing.JPanel {
         queryPanel.setLayout(queryPanelLayout);
         queryPanelLayout.setHorizontalGroup(
             queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queryPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(198, 198, 198))
             .addGroup(queryPanelLayout.createSequentialGroup()
                 .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(queryPanelLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                        .addGap(236, 236, 236)
+                        .addComponent(submitButton)
+                        .addGap(75, 75, 75)
+                        .addComponent(clearButton))
+                    .addGroup(queryPanelLayout.createSequentialGroup()
                         .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(commentLabel)
-                            .addComponent(queryaboutLabel)
-                            .addComponent(emailLabel))
+                            .addGroup(queryPanelLayout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(commentLabel)
+                                    .addComponent(queryaboutLabel)))
+                            .addGroup(queryPanelLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(51, 51, 51)
                         .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(queryPanelLayout.createSequentialGroup()
@@ -124,42 +142,34 @@ public class QueryPanel extends javax.swing.JPanel {
                                 .addGap(38, 38, 38)
                                 .addComponent(feedbackRadioButton))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(queryPanelLayout.createSequentialGroup()
-                        .addGap(236, 236, 236)
-                        .addComponent(submitButton)
-                        .addGap(75, 75, 75)
-                        .addComponent(clearButton)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                            .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         queryPanelLayout.setVerticalGroup(
             queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(queryPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(queryPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(queryPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(52, 52, 52)
                 .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(commentLabel)
                     .addComponent(complaintRadioButton)
                     .addComponent(queryRadioButton)
                     .addComponent(feedbackRadioButton))
+                .addGap(18, 18, 18)
                 .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(queryPanelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(emailLabel)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addComponent(queryaboutLabel)
-                        .addGap(133, 133, 133))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, queryPanelLayout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)))
+                    .addComponent(queryaboutLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitButton)
                     .addComponent(clearButton))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -179,9 +189,31 @@ public class QueryPanel extends javax.swing.JPanel {
         UserMessage newMessage = new UserMessage();
 
         try {
-            newMessage.setEmail(emailTextField.getText());
+            newMessage.setEmail(userDetails.getEmail());
             newMessage.setMessage(queryTextArea.getText());
-            newMessage.setType(commentonbuttonGroup.getSelection().getActionCommand());
+            switch(commentTypeButtonGroup.getSelection().getActionCommand())
+            {
+                case "QUERY": 
+                    newMessage.setType("Query");
+                    break;
+                case "REPORT":
+                    newMessage.setType("Report");
+                    newMessage.setEmail("");
+                    break;
+                case "FEEDBACK":
+                    newMessage.setType("Feedback");
+                    newMessage.setEmail("");
+                    break;
+                default:
+                    newMessage.setType("Query");
+                    break;
+            }
+            System.out.println("userDetails.getEmail()");
+            System.out.println(userDetails.getEmail());
+            System.out.println("queryTextArea.getText()");
+            System.out.println(queryTextArea.getText());
+            System.out.println("commentonbuttonGroup.getSelection().getActionCommand()");
+            System.out.println(commentTypeButtonGroup.getSelection().getActionCommand());
 
             // Validate inputs
             if (newMessage.getMessage().isEmpty()) {
@@ -197,6 +229,7 @@ public class QueryPanel extends javax.swing.JPanel {
             UserMessageDBConnector.addUserMessage(newMessage);
 
             JOptionPane.showMessageDialog(null, "Query sent Successfully", "Successful Message", JOptionPane.PLAIN_MESSAGE);
+            cleanup();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error submitting query: " + e.getMessage());
         }
@@ -205,45 +238,31 @@ public class QueryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-        // TODO add your handling code here:
-       
-       complaintRadioButton.setSelected(false);
-       feedbackRadioButton.setSelected(false);
-       queryRadioButton.setSelected(false);
-       emailTextField.setText(null);
-       queryTextArea.setText(null);
+        cleanup();
     }//GEN-LAST:event_clearButtonActionPerformed
 
-    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
-        // TODO add your handling code here:
-        try{
-            if(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", emailTextField.getText())){
-                
-               
-                throw new Exception();
-             }
-            emailTextField.setForeground(Color.red);
-           }catch(Exception e){
-            emailTextField.setForeground(Color.black);
-           }
-    }//GEN-LAST:event_emailTextFieldActionPerformed
-
     private void queryRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryRadioButtonActionPerformed
-        // TODO add your handling code here:
-        if(commentonbuttonGroup.getSelection().getActionCommand() == "query")
-                emailTextField.setEnabled(true);
-        else
-            emailTextField.setEnabled(true);
+
     }//GEN-LAST:event_queryRadioButtonActionPerformed
+
+    private void complaintRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_complaintRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_complaintRadioButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.setContentPane(new Homepage(userDetails));
+        topFrame.invalidate();
+        topFrame.validate();
+    }//GEN-LAST:event_backButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JButton clearButton;
     private javax.swing.JLabel commentLabel;
-    private javax.swing.ButtonGroup commentonbuttonGroup;
+    private javax.swing.ButtonGroup commentTypeButtonGroup;
     private javax.swing.JRadioButton complaintRadioButton;
-    private javax.swing.JLabel emailLabel;
-    private javax.swing.JTextField emailTextField;
     private javax.swing.JRadioButton feedbackRadioButton;
     private javax.swing.JLabel headingLabel;
     private javax.swing.JScrollPane jScrollPane1;
@@ -253,4 +272,9 @@ public class QueryPanel extends javax.swing.JPanel {
     private javax.swing.JLabel queryaboutLabel;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
+    public void cleanup()
+    {
+       commentTypeButtonGroup.clearSelection();
+       queryTextArea.setText(null);
+    }
 }

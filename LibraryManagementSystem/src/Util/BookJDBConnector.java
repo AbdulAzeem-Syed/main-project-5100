@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Database Connector class for interacting with database
  * 
  */
-public class AdminDatabaseConnector {
+public class BookJDBConnector {
     
     private static final String URL = "jdbc:mysql://localhost:5000/project?useSSL=false";
     private static final String USERNAME = "root";
@@ -52,8 +52,9 @@ public class AdminDatabaseConnector {
     /**
      * Privatized constructor so as to not allow object creation
      */
-    private AdminDatabaseConnector() {}
+    private BookJDBConnector() {}
         
+                
         
         public static void addBook(Book book) {
         //add to database
@@ -71,9 +72,7 @@ public class AdminDatabaseConnector {
         }
     }
         
-        
-        
-    public static ArrayList<Book> getAllbooks() {
+    public static ArrayList<Book> getAllBooks() {
 //        return list of users from db
         ArrayList<Book> books = new ArrayList<>();
 

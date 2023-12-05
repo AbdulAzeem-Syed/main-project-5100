@@ -105,16 +105,34 @@ public class UserJDBConnector {
      * @param newUser modified user details to be added
      */
     public static void editUser(User oldUser, User newUser) {
-        String query = "UPDATE User SET name=?, email=? WHERE userid=?";
+        String query = "UPDATE user SET role=? WHERE userid=?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, newUser.getName());
-            stmt.setString(2, newUser.getEmail());
-            stmt.setInt(3, oldUser.getUserId());
+            stmt.setString(1, newUser.getRole());
+            stmt.setInt(2, oldUser.getUserId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+     public static User getUserByEmail(String email) {
+        
+        String query = "SELECT * FROM user where email = '" + email + "'";
+        User u = new User();
+        
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            u.setUserId(rs.getInt("userId"));
+            u.setName(rs.getString("name"));
+            u.setEmail(rs.getString("email"));
+            u.setRole(rs.getString("role"));
+            u.setPassword(rs.getString("password"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return u;
     }
 }

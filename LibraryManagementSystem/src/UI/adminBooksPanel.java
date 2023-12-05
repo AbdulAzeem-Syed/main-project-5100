@@ -5,10 +5,10 @@
 package UI;
 
 import Model.Book;
+import Util.BookJDBConnector;
 import Model.UserMessage;
 import java.awt.desktop.UserSessionEvent;
 import java.util.ArrayList;
-import Util.AdminDatabaseConnector;
 import Util.UserMessageDBConnector;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -238,7 +238,7 @@ public class adminBooksPanel extends javax.swing.JPanel {
             newBook.setAuthor(authorTextField.getText());
             newBook.setIsAvailable(isAvailableCheckBox.isSelected());
 
-            AdminDatabaseConnector.addBook(newBook);
+            BookJDBConnector.addBook(newBook);
             JOptionPane.showMessageDialog(null, "Book Registered Successfully", "Successful Registration", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -267,7 +267,7 @@ public class adminBooksPanel extends javax.swing.JPanel {
         }
         try {
             selectedBook = books.get(selectedIndex);
-            AdminDatabaseConnector.deleteBook(selectedBook);
+            BookJDBConnector.deleteBook(selectedBook);
             JOptionPane.showMessageDialog(null, "User deleted successfully", "Successfully deleted", JOptionPane.INFORMATION_MESSAGE);
             clearFields();
             populateTable();
@@ -284,6 +284,7 @@ public class adminBooksPanel extends javax.swing.JPanel {
             newBook.setAuthor(editBookAuthorTextField.getText());
             newBook.setIsAvailable(editBookisAvailableCheckBox.isSelected());
             AdminDatabaseConnector.editBook(selectedBook, newBook);
+            BookJDBConnector.editBook(selectedBook, newBook);
             JOptionPane.showMessageDialog(null, "Book Edited Successfully", "Successful Edit", JOptionPane.INFORMATION_MESSAGE);
             clearFields();
             populateTable();
@@ -318,7 +319,7 @@ public class adminBooksPanel extends javax.swing.JPanel {
 
     public void populateTable() {
         try {
-            this.books = AdminDatabaseConnector.getAllbooks();
+            this.books = BookJDBConnector.getAllBooks();
             DefaultTableModel model = (DefaultTableModel) bookTable.getModel();
             model.setRowCount(0);
             for (Book u: books) {
