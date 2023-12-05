@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 /**
  * Database Connector class for interacting with database
@@ -18,36 +20,34 @@ public class BookJDBConnector {
     private static final String URL = "jdbc:mysql://localhost:5000/project?useSSL=false";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "password";
+    
 
-    public static void getData() {
-        String querybook = "select count(*) from project.book";
-        String queryuser = "select count(*) from project.user";
-        String queryreport = "select count(*) from project.user_queries";
+    public static Dictionary<String, Integer> getData() {
+        Dictionary<String, Integer> dict= new Hashtable<>();
+        String querybook = "SELECT COUNT(*) as book_count from book";
+        String queryuser = "SELECT COUNT(*) as user_count from user";
+        String queryreport = "SELECT COUNT(*) as report_count from user_queries";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(querybook);
             ResultSet rs = stmt.executeQuery(querybook);
             rs.next();
-            int countbooks = rs.getInt(1);
+            dict.put("books", rs.getInt("book_count"));
             
             PreparedStatement stmt1 = conn.prepareStatement(queryuser);
             ResultSet rs1 = stmt1.executeQuery(queryuser);
             rs1.next();
-            int countusers = rs1.getInt(1);
+            dict.put("users", rs1.getInt("user_count"));
             
             PreparedStatement stmt2 = conn.prepareStatement(queryreport);
             ResultSet rs2 = stmt2.executeQuery(queryreport);
             rs2.next();
-            int countreports = rs2.getInt(1);
-            
-            System.out.println("Total Users : " + countusers);
-            System.out.println("Total Books : " + countbooks);
-            System.out.println("Total Reports : " + countreports);
+            dict.put("reports", rs2.getInt("report_count"));
 //            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-    }
+        return dict;
+}
 
     /**
      * Privatized constructor so as to not allow object creation
@@ -58,11 +58,12 @@ public class BookJDBConnector {
         
         public static void addBook(Book book) {
         //add to database
-        String query = "INSERT INTO book(name, author) VALUES(?,?)";
+        String query = "INSERT INTO book(name, author, isAvailable) VALUES(?,?,?)";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, book.getBookname());
             stmt.setString(2, book.getAuthor());
+            stmt.setBoolean(3, book.getIsAvailable());
             int rows = stmt.executeUpdate();
             System.out.println("Rows impacted : " + rows);
 //            conn.close();
@@ -109,12 +110,14 @@ public class BookJDBConnector {
     }
     
     public static void editBook(Book oldBook, Book newBook) {
-        String query = "UPDATE book SET isAvailable=? WHERE bookid=?";
+        String query = "UPDATE book SET name=?, author=?, isAvailable=? WHERE bookId=?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setBoolean(1, newBook.getIsAvailable());
-            stmt.setInt(2, oldBook.getBookId());
+            stmt.setString(1, newBook.getBookname());
+            stmt.setString(2, newBook.getAuthor());
+            stmt.setBoolean(3, newBook.getIsAvailable());
+            stmt.setInt(4, oldBook.getBookId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -31,12 +31,12 @@ public class adminHomePanel extends javax.swing.JPanel {
 
         totalUsersLabel = new javax.swing.JLabel();
         totalBooksLabel = new javax.swing.JLabel();
-        totalUsersTextField = new javax.swing.JTextField();
-        totalBooksTextField = new javax.swing.JTextField();
         totalReportsLabel = new javax.swing.JLabel();
-        totalReportsTextField = new javax.swing.JTextField();
         refreshSummaryButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        userLabel = new javax.swing.JLabel();
+        bookLabel = new javax.swing.JLabel();
+        reportLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
@@ -60,6 +60,12 @@ public class adminHomePanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Summary");
 
+        userLabel.setText("userLabel");
+
+        bookLabel.setText("bookLabel");
+
+        reportLabel.setText("reportLabel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,18 +74,18 @@ public class adminHomePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(142, 142, 142)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(refreshSummaryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(refreshSummaryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(totalUsersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(totalBooksLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(totalReportsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(totalUsersTextField)
-                                    .addComponent(totalBooksTextField)
-                                    .addComponent(totalReportsTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))))
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(userLabel)
+                                    .addComponent(bookLabel)
+                                    .addComponent(reportLabel)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(268, 268, 268)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -93,16 +99,16 @@ public class adminHomePanel extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalUsersLabel)
-                    .addComponent(totalUsersTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(userLabel))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalBooksLabel)
-                    .addComponent(totalBooksTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(bookLabel))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalReportsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totalReportsLabel))
-                .addGap(27, 27, 27)
+                    .addComponent(totalReportsLabel)
+                    .addComponent(reportLabel))
+                .addGap(28, 28, 28)
                 .addComponent(refreshSummaryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(104, Short.MAX_VALUE))
         );
@@ -110,22 +116,22 @@ public class adminHomePanel extends javax.swing.JPanel {
 
     private void refreshSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshSummaryButtonActionPerformed
         // TODO add your handling code here:
-        BookJDBConnector.getData();
- //       totalBooksTextField.setText();
- //       totalUsersTextField.setText();
- //       totalReportsTextField.setText();
+        var data = BookJDBConnector.getData();
+        bookLabel.setText(data.get("books").toString());
+        userLabel.setText(data.get("users").toString());
+        reportLabel.setText(data.get("reports").toString());
         
     }//GEN-LAST:event_refreshSummaryButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bookLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton refreshSummaryButton;
+    private javax.swing.JLabel reportLabel;
     private javax.swing.JLabel totalBooksLabel;
-    private javax.swing.JTextField totalBooksTextField;
     private javax.swing.JLabel totalReportsLabel;
-    private javax.swing.JTextField totalReportsTextField;
     private javax.swing.JLabel totalUsersLabel;
-    private javax.swing.JTextField totalUsersTextField;
+    private javax.swing.JLabel userLabel;
     // End of variables declaration//GEN-END:variables
 }
