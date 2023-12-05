@@ -37,15 +37,18 @@ public class adminPanel extends javax.swing.JPanel {
         adminHomeButton = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(142, 199, 61));
+
+        adminSplitPane.setBackground(new java.awt.Color(153, 255, 153));
         adminSplitPane.setDividerSize(1);
         adminSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        topPanel.setBackground(new java.awt.Color(204, 204, 255));
+        topPanel.setBackground(new java.awt.Color(204, 255, 204));
 
         adminLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         adminLabel.setText("ADMIN PANEL");
 
-        reportsButton.setBackground(new java.awt.Color(153, 153, 255));
+        reportsButton.setBackground(new java.awt.Color(255, 102, 51));
         reportsButton.setText("Reports");
         reportsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,7 +56,7 @@ public class adminPanel extends javax.swing.JPanel {
             }
         });
 
-        booksButton.setBackground(new java.awt.Color(153, 153, 255));
+        booksButton.setBackground(new java.awt.Color(255, 102, 51));
         booksButton.setText("Books");
         booksButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,7 +64,7 @@ public class adminPanel extends javax.swing.JPanel {
             }
         });
 
-        logoutButton.setBackground(new java.awt.Color(153, 153, 255));
+        logoutButton.setBackground(new java.awt.Color(255, 102, 51));
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +72,7 @@ public class adminPanel extends javax.swing.JPanel {
             }
         });
 
-        adminHomeButton.setBackground(new java.awt.Color(153, 153, 255));
+        adminHomeButton.setBackground(new java.awt.Color(255, 102, 51));
         adminHomeButton.setText("Admin Home");
         adminHomeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,27 +85,26 @@ public class adminPanel extends javax.swing.JPanel {
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addGap(268, 268, 268)
-                        .addComponent(adminLabel))
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(adminHomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(booksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(reportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(adminHomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(booksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(reportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addGap(312, 312, 312)
+                .addComponent(adminLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(adminLabel)
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(booksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(adminHomeButton)
@@ -113,7 +115,7 @@ public class adminPanel extends javax.swing.JPanel {
 
         adminSplitPane.setTopComponent(topPanel);
 
-        bottomPanel.setBackground(new java.awt.Color(204, 204, 255));
+        bottomPanel.setBackground(new java.awt.Color(204, 255, 204));
         bottomPanel.setMinimumSize(new java.awt.Dimension(700, 400));
         bottomPanel.setLayout(new java.awt.CardLayout());
         adminSplitPane.setRightComponent(bottomPanel);
@@ -122,9 +124,7 @@ public class adminPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(adminSplitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(adminSplitPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
