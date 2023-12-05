@@ -5,6 +5,9 @@
 package UI;
 
 import java.awt.CardLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -15,7 +18,9 @@ public class adminPanel extends javax.swing.JPanel {
     /**
      * Creates new form adminPanel
      */
-    public adminPanel() {
+    private JPanel loginPanel;
+    public adminPanel(JPanel loginPanel) {
+        this.loginPanel = loginPanel;
         initComponents();
     }
 
@@ -145,7 +150,10 @@ public class adminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_reportsButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        // TODO add your handling code here:
+        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.setContentPane(loginPanel);
+        topFrame.invalidate();
+        topFrame.validate();
         
     }//GEN-LAST:event_logoutButtonActionPerformed
 

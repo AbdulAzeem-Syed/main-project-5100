@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import Model.UserMessage;
 import Util.UserMessageDBConnector;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 /**
  *
@@ -24,7 +25,9 @@ public class QueryPanel extends javax.swing.JPanel {
     /**
      * Creates new form QueryPanel
      */
-    public QueryPanel(User user) {
+    private JPanel loginPanel;
+    public QueryPanel(User user, JPanel loginPanel) {
+        this.loginPanel = loginPanel;
         initComponents();
         userDetails = user;
     }
@@ -248,7 +251,7 @@ public class QueryPanel extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.setContentPane(new Homepage(userDetails));
+        topFrame.setContentPane(new Homepage(userDetails, loginPanel));
         topFrame.invalidate();
         topFrame.validate();
     }//GEN-LAST:event_backButtonActionPerformed

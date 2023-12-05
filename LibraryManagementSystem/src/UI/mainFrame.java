@@ -18,15 +18,6 @@ import javax.swing.JPanel;
  * @author Abdul
  */
 public class mainFrame extends javax.swing.JFrame {
-
-    public JPanel getLoginPanel() {
-        return loginPanel;
-    }
-
-    public void setLoginPanel(JPanel loginPanel) {
-        this.loginPanel = loginPanel;
-    }
-
     /**
      * Creates new form mainFrame
      */
@@ -230,9 +221,9 @@ public class mainFrame extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(loginPanelLayout.createSequentialGroup()
                         .addGap(82, 82, 82)
-                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(guestLoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(guestLoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                            .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(loginPanelLayout.createSequentialGroup()
                         .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(loginUserEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,25 +282,29 @@ public class mainFrame extends javax.swing.JFrame {
         {
             String outputMessage = "Invalid Email";
             JOptionPane.showMessageDialog(this, outputMessage, "Error", HEIGHT);
+            return;
         }
         if(user.getPassword().equals(passwordPasswordField.getText())){
+            loginUserEmailTextField.setText("");
+            passwordPasswordField.setText("");
+            
             if(user.getRole().equals("Member") || user.getRole().equals("Freezed Member")){
-                setContentPane(new Homepage(user));
+                setContentPane(new Homepage(user, loginPanel));
                 invalidate();
                 validate();
             }
             else if(user.getRole().equals("Librarian")){
-                setContentPane(new LibrarianPanel());
+                setContentPane(new LibrarianPanel(loginPanel));
                 invalidate();
                 validate();
             }
             else if(user.getRole().equals("Admin")){
-                setContentPane(new adminPanel());
+                setContentPane(new adminPanel(loginPanel));
                 invalidate();
                 validate();
             }
             else{
-                setContentPane(new Homepage());
+                setContentPane(new Homepage(loginPanel));
                 invalidate();
                 validate();
             }
@@ -440,7 +435,7 @@ public class mainFrame extends javax.swing.JFrame {
 
     private void guestLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guestLoginButtonActionPerformed
         // TODO add your handling code here:
-        setContentPane(new Homepage());
+        setContentPane(new Homepage(loginPanel));
         invalidate();
         validate();
     }//GEN-LAST:event_guestLoginButtonActionPerformed

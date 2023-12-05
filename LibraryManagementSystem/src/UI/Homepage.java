@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -35,7 +36,9 @@ public class Homepage extends javax.swing.JPanel {
     private ArrayList<Book> books = new ArrayList();
     private Book selectedBook;
     private User userDetails = null;
-    public Homepage() {
+    private JPanel loginPanel;
+    public Homepage(JPanel loginPanel) {
+        this.loginPanel = loginPanel;
         initComponents();
         updateTable();
         try{
@@ -47,6 +50,7 @@ public class Homepage extends javax.swing.JPanel {
         requestBorrowButton.setVisible(false);
         contactUsButton.setVisible(false);
         viewBooksButton.setVisible(false);
+        logoutButton.setText("Back");
         booksTable.removeColumn(booksTable.getColumnModel().getColumn(3));
         }
         catch(Exception e)
@@ -55,7 +59,8 @@ public class Homepage extends javax.swing.JPanel {
         }
     }
     
-    public Homepage(User user) {
+    public Homepage(User user, JPanel loginPanel) {
+        this.loginPanel = loginPanel;
         initComponents();
         updateTable();
         userDetails = user;
@@ -253,7 +258,7 @@ public class Homepage extends javax.swing.JPanel {
     private void contactUsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactUsButtonActionPerformed
         // TODO add your handling code here:
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.setContentPane(new QueryPanel(userDetails));
+        topFrame.setContentPane(new QueryPanel(userDetails, loginPanel));
         topFrame.invalidate();
         topFrame.validate();
     }//GEN-LAST:event_contactUsButtonActionPerformed
@@ -269,7 +274,7 @@ public class Homepage extends javax.swing.JPanel {
         {
             selectedBook = books.get(selectedIndex);
             JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            topFrame.setContentPane(new BookView(userDetails, selectedBook.getBookname()));
+            topFrame.setContentPane(new BookView(userDetails, selectedBook.getBookname(), loginPanel));
             topFrame.invalidate();
             topFrame.validate();
         }
@@ -319,14 +324,14 @@ public class Homepage extends javax.swing.JPanel {
 
     private void viewBooksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBooksButtonActionPerformed
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.setContentPane(new UserBooks(userDetails));
+        topFrame.setContentPane(new UserBooks(userDetails, loginPanel));
         topFrame.invalidate();
         topFrame.validate();
     }//GEN-LAST:event_viewBooksButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.setContentPane(new mainFrame().getLoginPanel());
+        topFrame.setContentPane(loginPanel);
         topFrame.invalidate();
         topFrame.validate();
     }//GEN-LAST:event_logoutButtonActionPerformed

@@ -12,6 +12,7 @@ import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -24,7 +25,9 @@ public class BookView extends javax.swing.JPanel {
     /**
      * Creates new form BookView
      */
-    public BookView(User user, String bookName) {
+    private JPanel loginPanel;
+    public BookView(User user, String bookName, JPanel loginPanel) {
+        this.loginPanel = loginPanel;
         initComponents();
         userDetails = user;
         try{
@@ -106,14 +109,14 @@ public class BookView extends javax.swing.JPanel {
         if(userDetails == null)
         {
             JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            topFrame.setContentPane(new Homepage());
+            topFrame.setContentPane(new Homepage(loginPanel));
             topFrame.invalidate();
             topFrame.validate();
         }
         else
         {
             JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            topFrame.setContentPane(new Homepage(userDetails));
+            topFrame.setContentPane(new Homepage(userDetails, loginPanel));
             topFrame.invalidate();
             topFrame.validate();
         }
