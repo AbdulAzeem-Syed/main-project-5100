@@ -109,13 +109,12 @@ public class BookJDBConnector {
     }
     
     public static void editBook(Book oldBook, Book newBook) {
-        String query = "UPDATE book SET name=?, author=? WHERE id=?";
+        String query = "UPDATE book SET isAvailable=? WHERE bookid=?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, newBook.getBookname());
-            stmt.setString(2, newBook.getAuthor());
-            stmt.setInt(3, oldBook.getBookId());
+            stmt.setBoolean(1, newBook.getIsAvailable());
+            stmt.setInt(2, oldBook.getBookId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

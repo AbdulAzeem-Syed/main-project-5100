@@ -7,6 +7,7 @@ package Util;
 import java.sql.*;
 import java.util.ArrayList;
 import Model.BookBorrowed;
+import java.time.LocalDate;
 /**
  *
  * @author amer2
@@ -29,16 +30,15 @@ public class BookBorrowedDBConnector  {
      * @see BookBorrowed
      * @param user BookBorrowed object to be added
      */
-    public static void addBorrowInfo(BookBorrowed bookBorrowed) {
+    public static void addBorrowInfo(int bookId, int userId) {
         //add to database
-        String query = "INSERT INTO book_borrowed(borrowId, bookId, userId, dueDate, status) VALUES(?,?,?,?,?)";
+        String query = "INSERT INTO book_borrowed(bookId, userId, dueDate, status) VALUES(?,?,?,?)";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, bookBorrowed.getBorrowId());
-            stmt.setInt(2, bookBorrowed.getBookId());
-            stmt.setInt(3, bookBorrowed.getUserId());
-            stmt.setDate(4, new java.sql.Date(bookBorrowed.getDueDate().getTime()));
-            stmt.setString(5, bookBorrowed.getStatus());
+            stmt.setInt(1, bookId);
+            stmt.setInt(2, userId);
+            stmt.setDate(3, new java.sql.Date(Date.valueOf(LocalDate.now().plusDays(30)).getTime()));
+            stmt.setString(4, "Requested");
             int rows = stmt.executeUpdate();
             System.out.println("Rows impacted : " + rows);
 //            conn.close();
@@ -88,11 +88,12 @@ public class BookBorrowedDBConnector  {
      * 
      */
     public static void deleteBookBorrowed(BookBorrowed u) {
-        String query = "delete from book_borrowed where id = ?";
+        String query = "delete from book_borrowed where bookId = ? AND userId = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, u.getBorrowId());
+            stmt.setInt(1, u.getBookId());
+            stmt.setInt(2, u.getUserId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
