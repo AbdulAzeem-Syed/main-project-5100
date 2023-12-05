@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,11 +31,12 @@ public class LibrarianPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form LibrarianPanel
-     */
+     */   
 //    private ArrayList<User> users;
 //    private User selectedUser;
-
-    public LibrarianPanel() {
+    private JPanel loginPanel;
+    public LibrarianPanel(JPanel loginPanel) {
+        this.loginPanel = loginPanel;
         initComponents();
        // populateData();
     }
@@ -177,7 +179,7 @@ public class LibrarianPanel extends javax.swing.JPanel {
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.setContentPane(new mainFrame().getLoginPanel());
+        topFrame.setContentPane(loginPanel);
         topFrame.invalidate();
         topFrame.validate();
     }//GEN-LAST:event_logoutButtonActionPerformed

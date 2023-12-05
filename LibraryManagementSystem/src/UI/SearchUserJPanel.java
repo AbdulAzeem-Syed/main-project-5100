@@ -170,7 +170,7 @@ public class SearchUserJPanel extends javax.swing.JPanel {
             UserJDBConnector.editUser(selectedUser, newUser);
 
             String outputMessage = "Updated user role status";
-            JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+            JOptionPane.showMessageDialog(this, outputMessage, "LMS", HEIGHT);
             populateTable();
         }
         catch(Exception e)

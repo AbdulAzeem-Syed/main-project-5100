@@ -10,6 +10,7 @@ import Util.BookBorrowedDBConnector;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -26,7 +27,9 @@ public class UserBooks extends javax.swing.JPanel {
      * Creates new form UserBooks
      */
     private User userDetails = null;
-    public UserBooks(User user) {
+    private JPanel loginPanel;
+    public UserBooks(User user, JPanel loginPanel) {
+        this.loginPanel = loginPanel;
         initComponents();
         userDetails = user;
         updateTable();
@@ -143,7 +146,7 @@ public class UserBooks extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        topFrame.setContentPane(new Homepage(userDetails));
+        topFrame.setContentPane(new Homepage(userDetails, loginPanel));
         topFrame.invalidate();
         topFrame.validate();
     }//GEN-LAST:event_backButtonActionPerformed

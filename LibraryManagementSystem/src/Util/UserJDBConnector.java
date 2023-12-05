@@ -124,7 +124,9 @@ public class UserJDBConnector {
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            rs.next();
+            boolean emptyCheck = rs.next();
+            if(!emptyCheck)
+                return null;
             u.setUserId(rs.getInt("userId"));
             u.setName(rs.getString("name"));
             u.setEmail(rs.getString("email"));

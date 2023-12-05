@@ -18,6 +18,10 @@ public class adminHomePanel extends javax.swing.JPanel {
      */
     public adminHomePanel(JPanel bottomPanel) {
         initComponents();
+        var data = BookJDBConnector.getData();
+        bookLabel.setText(data.get("books").toString());
+        userLabel.setText(data.get("users").toString());
+        reportLabel.setText(data.get("reports").toString());
     }
 
     /**
