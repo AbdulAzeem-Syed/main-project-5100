@@ -136,9 +136,9 @@ public class SearchUserJPanel extends javax.swing.JPanel {
 
     private void searchButtonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonButtonActionPerformed
         // TODO add your handling code here:
-         var sorter = new TableRowSorter(userTable.getModel());
+         TableRowSorter sorter = new TableRowSorter(userTable.getModel());
         userTable.setRowSorter(sorter);
-        var searchString = searchTextField.getText();
+        String searchString = searchTextField.getText();
         if (searchString.length() == 0) {
             sorter.setRowFilter(null);
         } else {

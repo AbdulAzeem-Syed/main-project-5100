@@ -130,9 +130,9 @@ public class SearchBookPanel extends javax.swing.JPanel {
 
     private void searchButtonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonButtonActionPerformed
         // TODO add your handling code here:
-        var sorter = new TableRowSorter(bookTable.getModel());
+        TableRowSorter sorter = new TableRowSorter(bookTable.getModel());
         bookTable.setRowSorter(sorter);
-        var searchString = searchTextField.getText();
+        String searchString = searchTextField.getText();
         if (searchString.length() == 0) {
             sorter.setRowFilter(null);
         } else {

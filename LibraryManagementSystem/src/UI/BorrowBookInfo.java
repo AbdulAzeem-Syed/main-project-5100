@@ -146,9 +146,9 @@ public class BorrowBookInfo extends javax.swing.JPanel {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         
-        var sorter = new TableRowSorter(borrowerInfoTable.getModel());
+        TableRowSorter sorter = new TableRowSorter(borrowerInfoTable.getModel());
         borrowerInfoTable.setRowSorter(sorter);
-        var searchString = searchBorowerInfo.getText();
+        String searchString = searchBorowerInfo.getText();
         if (searchString.length() == 0) {
             sorter.setRowFilter(null);
         } else {
