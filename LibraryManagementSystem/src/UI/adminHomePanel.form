@@ -25,19 +25,19 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="refreshSummaryButton" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="refreshSummaryButton" min="-2" pref="338" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="totalUsersLabel" max="32767" attributes="0"/>
                                   <Component id="totalBooksLabel" max="32767" attributes="0"/>
                                   <Component id="totalReportsLabel" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="totalUsersTextField" max="32767" attributes="0"/>
-                                  <Component id="totalBooksTextField" max="32767" attributes="0"/>
-                                  <Component id="totalReportsTextField" alignment="0" pref="200" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="userLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bookLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="reportLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -59,19 +59,19 @@
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="totalUsersLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="totalUsersTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="userLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="totalBooksLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bookLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="totalBooksLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="totalBooksTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="totalReportsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="totalReportsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="reportLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="refreshSummaryButton" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace pref="104" max="32767" attributes="0"/>
           </Group>
@@ -95,10 +95,6 @@
         <Property name="text" type="java.lang.String" value="Total Books:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="totalUsersTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="totalBooksTextField">
-    </Component>
     <Component class="javax.swing.JLabel" name="totalReportsLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -106,8 +102,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Total Reports:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="totalReportsTextField">
     </Component>
     <Component class="javax.swing.JButton" name="refreshSummaryButton">
       <Properties>
@@ -126,6 +120,21 @@
           <Font name="Segoe UI" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Summary"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="userLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="userLabel"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="bookLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="bookLabel"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="reportLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="reportLabel"/>
       </Properties>
     </Component>
   </SubComponents>
