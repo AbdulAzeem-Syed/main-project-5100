@@ -54,7 +54,7 @@ public class QueryPanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(700, 500));
 
-        queryPanel.setBackground(new java.awt.Color(142, 199, 61));
+        queryPanel.setBackground(new java.awt.Color(204, 255, 204));
 
         headingLabel.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         headingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -148,13 +148,10 @@ public class QueryPanel extends javax.swing.JPanel {
         queryPanelLayout.setVerticalGroup(
             queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(queryPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(queryPanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(queryPanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(headingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addGroup(queryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(commentLabel)

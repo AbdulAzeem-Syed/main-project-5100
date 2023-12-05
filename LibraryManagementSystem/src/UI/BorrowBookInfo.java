@@ -50,7 +50,7 @@ public class BorrowBookInfo extends javax.swing.JPanel {
         updateBookStatus = new javax.swing.JButton();
         deleteBorrowInfoButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(142, 199, 61));
+        setBackground(new java.awt.Color(204, 255, 204));
 
         borrowerInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -48,7 +48,6 @@ public class adminPanel extends javax.swing.JPanel {
         adminLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         adminLabel.setText("ADMIN PANEL");
 
-        reportsButton.setBackground(new java.awt.Color(255, 102, 51));
         reportsButton.setText("Reports");
         reportsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,7 +55,6 @@ public class adminPanel extends javax.swing.JPanel {
             }
         });
 
-        booksButton.setBackground(new java.awt.Color(255, 102, 51));
         booksButton.setText("Books");
         booksButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,7 +62,6 @@ public class adminPanel extends javax.swing.JPanel {
             }
         });
 
-        logoutButton.setBackground(new java.awt.Color(255, 102, 51));
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +69,6 @@ public class adminPanel extends javax.swing.JPanel {
             }
         });
 
-        adminHomeButton.setBackground(new java.awt.Color(255, 102, 51));
         adminHomeButton.setText("Admin Home");
         adminHomeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

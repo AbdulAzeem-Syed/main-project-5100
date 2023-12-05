@@ -65,6 +65,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
         suggestionTextArea = new javax.swing.JTextArea();
         submitButton = new javax.swing.JButton();
 
+        feedbackPanel.setBackground(new java.awt.Color(204, 255, 204));
+
         headingLabel.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         headingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headingLabel.setText("Feedback Form");
@@ -273,8 +275,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                             .addComponent(collectionRadioButton2)
                             .addComponent(collectionRadioButton3)
                             .addComponent(collectionRadioButton4)
-                            .addComponent(collectionRadioButton5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addComponent(collectionRadioButton5)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, feedbackPanelLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(feedbackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

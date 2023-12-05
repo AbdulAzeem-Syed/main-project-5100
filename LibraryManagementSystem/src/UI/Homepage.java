@@ -91,10 +91,9 @@ public class Homepage extends javax.swing.JPanel {
         logo = new javax.swing.JLabel();
         contactUsButton = new javax.swing.JButton();
         viewBooksButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(142, 199, 61));
+        setBackground(new java.awt.Color(204, 255, 204));
         setPreferredSize(new java.awt.Dimension(800, 550));
 
         booksTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -129,7 +128,6 @@ public class Homepage extends javax.swing.JPanel {
             }
         });
 
-        searchButton.setBackground(new java.awt.Color(255, 51, 0));
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +135,6 @@ public class Homepage extends javax.swing.JPanel {
             }
         });
 
-        viewBook.setBackground(new java.awt.Color(255, 51, 0));
         viewBook.setText("View");
         viewBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +142,6 @@ public class Homepage extends javax.swing.JPanel {
             }
         });
 
-        requestBorrowButton.setBackground(new java.awt.Color(255, 51, 0));
         requestBorrowButton.setText("Borrow");
         requestBorrowButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +151,6 @@ public class Homepage extends javax.swing.JPanel {
 
         logo.setText("logo");
 
-        contactUsButton.setBackground(new java.awt.Color(255, 51, 0));
         contactUsButton.setText("Contact us");
         contactUsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,7 +158,6 @@ public class Homepage extends javax.swing.JPanel {
             }
         });
 
-        viewBooksButton.setBackground(new java.awt.Color(255, 51, 0));
         viewBooksButton.setText("Borrowed Books");
         viewBooksButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,9 +165,6 @@ public class Homepage extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("jButton1");
-
-        logoutButton.setBackground(new java.awt.Color(255, 51, 0));
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,11 +202,6 @@ public class Homepage extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(viewBooksButton)))
                 .addGap(25, 25, 25))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jButton1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +213,7 @@ public class Homepage extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(viewBooksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(searchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,11 +231,6 @@ public class Homepage extends javax.swing.JPanel {
                             .addComponent(contactUsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                             .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(30, 30, 30))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jButton1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -354,7 +335,6 @@ public class Homepage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable booksTable;
     private javax.swing.JButton contactUsButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logo;
     private javax.swing.JButton logoutButton;
