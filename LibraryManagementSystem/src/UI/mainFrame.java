@@ -395,7 +395,7 @@ public class mainFrame extends javax.swing.JFrame {
         if(hasError)
         {
             String errorMessage = "Invalid input, below are the invalid fields:\n" + errorFields;
-            JOptionPane.showMessageDialog(this, errorMessage, "Customer information", HEIGHT);
+            JOptionPane.showMessageDialog(this, errorMessage, "LMS", HEIGHT);
         }
         else
         {
@@ -409,7 +409,7 @@ public class mainFrame extends javax.swing.JFrame {
             clearRegisterForm();
             
             String outputMessage = "Sign up Successfull";
-            JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+            JOptionPane.showMessageDialog(this, outputMessage, "LMS", HEIGHT);
         }
         
     }//GEN-LAST:event_registerButtonActionPerformed

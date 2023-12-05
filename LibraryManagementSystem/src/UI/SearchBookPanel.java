@@ -153,7 +153,7 @@ public class SearchBookPanel extends javax.swing.JPanel {
             BookJDBConnector.editBook(selectedBook, newBook);
 
             String outputMessage = "Changed the availability of the book";
-            JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+            JOptionPane.showMessageDialog(this, outputMessage, "LMS", HEIGHT);
             populateTable();
         }
         catch(Exception e)

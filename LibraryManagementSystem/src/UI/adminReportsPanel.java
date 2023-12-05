@@ -186,7 +186,7 @@ public class adminReportsPanel extends javax.swing.JPanel {
         try {
             selectedUserMessage = usermessage.get(selectedIndex);
             UserMessageDBConnector.deleteUser(selectedUserMessage);
-            JOptionPane.showMessageDialog(null, "User deleted successfully", "Successfully deleted", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Query deleted successfully", "Successfully deleted", JOptionPane.INFORMATION_MESSAGE);
             clearFields();
             populateTable();
         } catch (Exception e) {

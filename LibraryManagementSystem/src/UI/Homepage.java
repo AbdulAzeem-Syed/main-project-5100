@@ -306,14 +306,14 @@ public class Homepage extends javax.swing.JPanel {
             if(checkBorrowedBook != null)
             {
                 String outputMessage = "ERROR \nYou have already requested this book. If not yet picked, please visit the library reciption and pick your book";
-                JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+                JOptionPane.showMessageDialog(this, outputMessage, "LMS", HEIGHT);
             }
             else
             {
                 BookBorrowedDBConnector.addBorrowInfo(selectedBook.getBookId(), userDetails.getUserId());
             
                 String outputMessage = "SUCCESS \nSent a borrow request to librarian, please visit the library reciption and pick your book";
-                JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+                JOptionPane.showMessageDialog(this, outputMessage, "LMS", HEIGHT);
             }
         }
         catch(Exception e)

@@ -181,7 +181,7 @@ public class BorrowBookInfo extends javax.swing.JPanel {
             
             
             String outputMessage = "Edit successfull";
-            JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+            JOptionPane.showMessageDialog(this, outputMessage, "LMS", HEIGHT);
             updateTable();
 //            bookNameLabel.setText(selectedBook.getBookName());
 //            statusType.setSelectedItem(selectedBook.getStatus());
@@ -206,7 +206,7 @@ public class BorrowBookInfo extends javax.swing.JPanel {
             selectedBook = booksBorrowed.get(selectedIndex);
             BookBorrowedDBConnector.deleteBookBorrowed(selectedBook);
             String outputMessage = "Delete successfull";
-            JOptionPane.showMessageDialog(this, outputMessage, "Customer information", HEIGHT);
+            JOptionPane.showMessageDialog(this, outputMessage, "LMS", HEIGHT);
             updateTable();
         }
         catch(Exception e)

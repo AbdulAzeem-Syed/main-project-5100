@@ -235,6 +235,8 @@ public class adminBooksPanel extends javax.swing.JPanel {
 
             BookJDBConnector.addBook(newBook);
             JOptionPane.showMessageDialog(null, "Book Registered Successfully", "Successful Registration", JOptionPane.INFORMATION_MESSAGE);
+            clearFields();
+            populateTable();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -263,7 +265,7 @@ public class adminBooksPanel extends javax.swing.JPanel {
         try {
             selectedBook = books.get(selectedIndex);
             BookJDBConnector.deleteBook(selectedBook);
-            JOptionPane.showMessageDialog(null, "User deleted successfully", "Successfully deleted", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Book deleted successfully", "Successfully deleted", JOptionPane.INFORMATION_MESSAGE);
             clearFields();
             populateTable();
         } catch (Exception e) {
@@ -332,7 +334,11 @@ public class adminBooksPanel extends javax.swing.JPanel {
     
     private void clearFields() {
         bookNameTextField.setText("");
-        authorTextField.setText("");
+        authorTextField.setText(""); 
+        isAvailableCheckBox.setSelected(false);
+        editBookNameTextField.setText("");  
+        editBookAuthorTextField.setText("");  
+        editBookisAvailableCheckBox.setSelected(false);
         selectedBook = null;
     }
 
