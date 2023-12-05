@@ -57,11 +57,12 @@ public class AdminDatabaseConnector {
         
         public static void addBook(Book book) {
         //add to database
-        String query = "INSERT INTO book(name, author) VALUES(?,?)";
+        String query = "INSERT INTO book(name, author, isAvailable) VALUES(?,?,?)";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, book.getBookname());
             stmt.setString(2, book.getAuthor());
+            stmt.setBoolean(3, book.getIsAvailable());
             int rows = stmt.executeUpdate();
             System.out.println("Rows impacted : " + rows);
 //            conn.close();
@@ -84,7 +85,7 @@ public class AdminDatabaseConnector {
                 Book u = new Book();
                 u.setBookname(rs.getString("name"));
                 u.setAuthor(rs.getString("author"));
-                
+                u.setIsAvailable(rs.getBoolean("isAvailable"));
                 u.setBookId(rs.getInt("bookid"));
                 books.add(u);
             }
@@ -110,13 +111,14 @@ public class AdminDatabaseConnector {
     }
     
     public static void editBook(Book oldBook, Book newBook) {
-        String query = "UPDATE book SET name=?, author=? WHERE id=?";
+        String query = "UPDATE book SET name=?, author=?, isAvailable=? WHERE bookId=?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, newBook.getBookname());
             stmt.setString(2, newBook.getAuthor());
-            stmt.setInt(3, oldBook.getBookId());
+            stmt.setBoolean(3, newBook.getIsAvailable());
+            stmt.setInt(4, oldBook.getBookId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
