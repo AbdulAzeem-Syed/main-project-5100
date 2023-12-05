@@ -64,7 +64,7 @@ public class adminBooksPanel extends javax.swing.JPanel {
         editBookisAvailableCheckBox = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(204, 255, 204));
-        setPreferredSize(new java.awt.Dimension(700, 400));
+        setPreferredSize(new java.awt.Dimension(800, 412));
 
         addBooksLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         addBooksLabel.setText("Add Books");
@@ -73,7 +73,6 @@ public class adminBooksPanel extends javax.swing.JPanel {
 
         authorLabel.setText("Author:");
 
-        addBookButton.setBackground(new java.awt.Color(255, 51, 0));
         addBookButton.setText("Submit");
         addBookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +105,6 @@ public class adminBooksPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(bookTable);
 
-        editBookButton.setBackground(new java.awt.Color(255, 51, 0));
         editBookButton.setText("Edit");
         editBookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +112,6 @@ public class adminBooksPanel extends javax.swing.JPanel {
             }
         });
 
-        deleteBookButton.setBackground(new java.awt.Color(255, 51, 0));
         deleteBookButton.setText("Delete");
         deleteBookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +123,6 @@ public class adminBooksPanel extends javax.swing.JPanel {
 
         editBookAuthorLabel.setText("Author:");
 
-        saveBookButton.setBackground(new java.awt.Color(255, 51, 0));
         saveBookButton.setText("Save");
         saveBookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

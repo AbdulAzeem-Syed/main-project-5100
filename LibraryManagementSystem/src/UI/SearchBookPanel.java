@@ -49,11 +49,9 @@ public class SearchBookPanel extends javax.swing.JPanel {
         bookTable = new javax.swing.JTable();
         editBookButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(142, 199, 61));
+        setBackground(new java.awt.Color(204, 255, 204));
         setPreferredSize(new java.awt.Dimension(800, 520));
 
-        searchButtonButton.setBackground(new java.awt.Color(0, 153, 0));
-        searchButtonButton.setForeground(new java.awt.Color(255, 255, 255));
         searchButtonButton.setText("Search");
         searchButtonButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,8 +84,6 @@ public class SearchBookPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(bookTable);
 
-        editBookButton.setBackground(new java.awt.Color(0, 153, 0));
-        editBookButton.setForeground(new java.awt.Color(255, 255, 255));
         editBookButton.setText("Change Availability");
         editBookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

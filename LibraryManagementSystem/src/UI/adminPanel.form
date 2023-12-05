@@ -103,9 +103,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="reportsButton">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="66" red="ff" type="rgb"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Reports"/>
               </Properties>
               <Events>
@@ -114,9 +111,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="booksButton">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="66" red="ff" type="rgb"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Books"/>
               </Properties>
               <Events>
@@ -125,9 +119,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="logoutButton">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="66" red="ff" type="rgb"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
               <Events>
@@ -136,9 +127,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="adminHomeButton">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="66" red="ff" type="rgb"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Admin Home"/>
               </Properties>
               <Events>

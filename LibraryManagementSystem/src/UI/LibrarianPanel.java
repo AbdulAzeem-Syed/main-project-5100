@@ -60,7 +60,7 @@ public class LibrarianPanel extends javax.swing.JPanel {
         jSplitPane1.setDividerLocation(95);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        topPanel.setBackground(new java.awt.Color(142, 199, 61));
+        topPanel.setBackground(new java.awt.Color(204, 255, 204));
 
         searchBookButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchBookButton.setText("Search Book");
@@ -90,7 +90,6 @@ public class LibrarianPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Librarian");
 
-        logoutButton.setBackground(new java.awt.Color(255, 51, 0));
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +133,7 @@ public class LibrarianPanel extends javax.swing.JPanel {
 
         jSplitPane1.setTopComponent(topPanel);
 
-        bottomPanel.setBackground(new java.awt.Color(142, 199, 61));
+        bottomPanel.setBackground(new java.awt.Color(204, 255, 204));
         bottomPanel.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(bottomPanel);
 

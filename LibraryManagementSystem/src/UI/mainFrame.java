@@ -76,7 +76,7 @@ public class mainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 512));
 
-        loginPanel.setBackground(new java.awt.Color(142, 199, 61));
+        loginPanel.setBackground(new java.awt.Color(204, 255, 204));
         loginPanel.setMinimumSize(new java.awt.Dimension(800, 512));
         loginPanel.setPreferredSize(new java.awt.Dimension(800, 512));
 
@@ -134,7 +134,6 @@ public class mainFrame extends javax.swing.JFrame {
             }
         });
 
-        loginButton.setBackground(new java.awt.Color(255, 51, 0));
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +141,6 @@ public class mainFrame extends javax.swing.JFrame {
             }
         });
 
-        guestLoginButton.setBackground(new java.awt.Color(255, 51, 0));
         guestLoginButton.setText("Guest Login");
         guestLoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +152,6 @@ public class mainFrame extends javax.swing.JFrame {
         signUpTextLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         signUpTextLabel.setText("Sign up");
 
-        registerButton.setBackground(new java.awt.Color(255, 51, 0));
         registerButton.setText("Register");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,7 +173,6 @@ public class mainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 0));
         jButton1.setText("Sign up");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,7 +230,7 @@ public class mainFrame extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(loginPanelLayout.createSequentialGroup()
                         .addGap(82, 82, 82)
-                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(guestLoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(loginPanelLayout.createSequentialGroup()

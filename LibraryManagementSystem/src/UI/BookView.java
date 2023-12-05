@@ -68,7 +68,7 @@ public class BookView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         imageLabel = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(142, 199, 61));
+        setBackground(new java.awt.Color(204, 255, 204));
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
