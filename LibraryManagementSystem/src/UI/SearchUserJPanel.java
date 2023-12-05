@@ -43,7 +43,7 @@ public class SearchUserJPanel extends javax.swing.JPanel {
         searchButtonButton = new javax.swing.JButton();
         editBookButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 102, 204));
+        setBackground(new java.awt.Color(142, 199, 61));
 
         searchTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +81,7 @@ public class SearchUserJPanel extends javax.swing.JPanel {
             userTable.getColumnModel().getColumn(0).setMaxWidth(40);
         }
 
-        searchButtonButton.setBackground(new java.awt.Color(0, 153, 0));
+        searchButtonButton.setBackground(new java.awt.Color(0, 102, 0));
         searchButtonButton.setForeground(new java.awt.Color(255, 255, 255));
         searchButtonButton.setText("Search");
         searchButtonButton.addActionListener(new java.awt.event.ActionListener() {

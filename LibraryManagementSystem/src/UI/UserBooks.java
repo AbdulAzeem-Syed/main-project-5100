@@ -48,6 +48,8 @@ public class UserBooks extends javax.swing.JPanel {
         searchButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(142, 199, 61));
+
         borrowerInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -76,6 +78,9 @@ public class UserBooks extends javax.swing.JPanel {
             }
         });
 
+        searchButton.setBackground(new java.awt.Color(216, 14, 50));
+        searchButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        searchButton.setForeground(new java.awt.Color(255, 255, 255));
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

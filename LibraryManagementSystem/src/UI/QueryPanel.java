@@ -54,6 +54,8 @@ public class QueryPanel extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(700, 500));
 
+        queryPanel.setBackground(new java.awt.Color(142, 199, 61));
+
         headingLabel.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         headingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headingLabel.setText("Query Form");

@@ -49,7 +49,7 @@ public class SearchBookPanel extends javax.swing.JPanel {
         bookTable = new javax.swing.JTable();
         editBookButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 102, 204));
+        setBackground(new java.awt.Color(142, 199, 61));
         setPreferredSize(new java.awt.Dimension(800, 520));
 
         searchButtonButton.setBackground(new java.awt.Color(0, 153, 0));
